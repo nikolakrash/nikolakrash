@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleBoosting - Платформа нового поколения для работы с Telegram</title>
+    <meta name="description" content="Мощная платформа для автоматизации работы с Telegram аккаунтами. Рассылки, парсинг, клонирование и многое другое.">
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-rocket"></i> TeleBoosting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Возможности</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#advantages">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Цены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Скачать</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Видео на весь экран как фон -->
+        <div class="hero-video-background">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="static/videos/generated_video_ced234b0-68c6-480c-9d70-9386327bede9.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="container hero-container">
+            <div class="hero-content-wrapper">
+                <!-- Левая часть - текст и CTA -->
+                <div class="hero-text-block">
+                    <h1 class="hero-title">
+                        TeleBoosting
+                    </h1>
+                    <p class="hero-subtitle">
+                        Автоматизация телеграм на высоком уровне
+                    </p>
+                    <p class="hero-description">
+                        Мы специализируемся на автоматизации работы с Telegram аккаунтами, массовых рассылках, парсинге и клонировании контента. С нашим решением ваши задачи выполняются быстро, эффективно и безопасно.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary-cta">
+                            <span>Связаться с нами</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#features" class="btn btn-secondary-cta">
+                            Узнать больше
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Правая часть - анимированные блоки -->
+                <div class="hero-animated-blocks">
+                    <div class="animated-block block-1">
+                        <div class="block-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="block-content">
+                            <h3>Быстрый старт</h3>
+                            <p>Начните работу за минуты</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animated-block block-2">
+                        <div class="block-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="block-content">
+                            <h3>Безопасность</h3>
+                            <p>Защита ваших аккаунтов</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animated-block block-3">
+                        <div class="block-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="block-content">
+                            <h3>Эффективность</h3>
+                            <p>Максимальная производительность</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Статистика внизу -->
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number" data-target="1000">0</div>
+                <div class="stat-label">Аккаунтов в системе</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Модулей автоматизации</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="99">0</div>
+                <div class="stat-label">% Успешных операций</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Все возможности платформы</h2>
+            <p class="section-subtitle">Полный набор инструментов для эффективной работы с Telegram</p>
+            
+            <div class="features-grid">
+                <!-- Менеджер аккаунтов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="feature-title">Менеджер аккаунтов</h3>
+                    <p class="feature-description">
+                        Централизованное управление всеми Telegram-аккаунтами и их параметрами.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Добавление аккаунтов через tdata</li>
+                        <li>Создание tdata с параметрами устройства</li>
+                        <li>Выбор страны, типа клиента и версии Telegram</li>
+                        <li>Просмотр и фильтрация аккаунтов по статусу</li>
+                        <li>Проверка и обновление статусов (frozen/limited через @SpamBot)</li>
+                        <li>Настройка прокси, импорт MTProto-ссылок и экспорт данных</li>
+                    </ul>
+                </div>
+
+                <!-- Прокси -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="feature-title">Прокси</h3>
+                    <p class="feature-description">
+                        Гибкое управление всеми прокси-серверами для безопасной работы модулей.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание папок и организация прокси</li>
+                        <li>Поддержка HTTP, SOCKS5 и MTProto</li>
+                        <li>Перемещение прокси между папками</li>
+                        <li>Проверка работоспособности и массовое управление</li>
+                        <li>Редактирование, удаление и экспорт списка</li>
+                    </ul>
+                </div>
+
+                <!-- Генератор параметров -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="feature-title">Генератор параметров</h3>
+                    <p class="feature-description">
+                        Генерация реалистичных параметров устройств для безопасной регистрации аккаунтов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Выбор типа приложения (Android, Telegram X, Desktop)</li>
+                        <li>Подбор бренда и модели устройства</li>
+                        <li>Автоматический выбор версии Android и клиента Telegram</li>
+                        <li>Генерация уникальных наборов параметров</li>
+                        <li>Ручная настройка и экспорт параметров</li>
+                    </ul>
+                </div>
+
+                <!-- Рассылка в ЛС -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3 class="feature-title">Рассылка в личные сообщения</h3>
+                    <p class="feature-description">
+                        Массовая рассылка сообщений в личные чаты с гибким форматированием и медиа.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Отправка сообщений в ЛС по базам получателей</li>
+                        <li>Несколько сообщений в одной кампании</li>
+                        <li>Форматирование текста, ссылки и эмодзи</li>
+                        <li>Прикрепление фото, видео и документов</li>
+                        <li>Настраиваемые задержки и выбор аккаунтов</li>
+                        <li>Статистика отправки и подробные логи</li>
+                    </ul>
+                </div>
+
+                <!-- Рассылка по группам -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="feature-title">Рассылка по группам</h3>
+                    <p class="feature-description">
+                        Массовая отправка сообщений в группы и каналы с поддержкой разных типов ссылок.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Работа с группами и каналами</li>
+                        <li>Несколько сообщений на один список чатов</li>
+                        <li>Поддержка @username, t.me и инвайт-ссылок</li>
+                        <li>Форматирование текста и медиафайлы</li>
+                        <li>Задержки, выбор аккаунтов и статистика отправки</li>
+                    </ul>
+                </div>
+
+                <!-- Сбор аудитории -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="feature-title">Сбор аудитории</h3>
+                    <p class="feature-description">
+                        Комплексный модуль парсинга и обработки баз Telegram-пользователей.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Парсинг участников из групп и чатов</li>
+                        <li>Парсер ЛС и сбор контактов из диалогов</li>
+                        <li>Фильтрация баз по активности, username, аватарке и Premium</li>
+                        <li>Исключение одних баз из других и удаление дублей</li>
+                        <li>Проверка ссылок на чаты и их доступности</li>
+                        <li>Экспорт баз в TXT, CSV и другие форматы</li>
+                    </ul>
+                </div>
+
+                <!-- Массовое создание групп -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="feature-title">Массовое создание групп</h3>
+                    <p class="feature-description">
+                        Одновременное создание множества групп с гибкой настройкой оформления.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание множества групп одним запуском</li>
+                        <li>Использование шаблонов для оформления</li>
+                        <li>Настройка названия и фото группы</li>
+                        <li>Приветственное сообщение и медиа в первую запись</li>
+                        <li>Публичные и приватные группы, права участников</li>
+                        <li>Экспорт ссылок на созданные группы и логи</li>
+                    </ul>
+                </div>
+
+                <!-- Массовое создание каналов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3 class="feature-title">Массовое создание каналов</h3>
+                    <p class="feature-description">
+                        Быстрое создание множества каналов по заранее подготовленным шаблонам.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание множества каналов одновременно</li>
+                        <li>Шаблоны контента и оформления</li>
+                        <li>Настройка названия и аватара канала</li>
+                        <li>Первое сообщение и медиафайлы</li>
+                        <li>Публичные и приватные каналы</li>
+                        <li>Экспорт ссылок и логирование</li>
+                    </ul>
+                </div>
+
+                <!-- Массовое создание ботов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">Массовое создание ботов</h3>
+                    <p class="feature-description">
+                        Автоматизированное создание большого количества Telegram-ботов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Массовое создание ботов</li>
+                        <li>Настройка параметров при создании</li>
+                        <li>Автоматический сбор и экспорт токенов</li>
+                        <li>Логирование всех операций</li>
+                    </ul>
+                </div>
+
+                <!-- Инвайтер -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="feature-title">Инвайтер</h3>
+                    <p class="feature-description">
+                        Массовое приглашение пользователей в группы и каналы по загруженным базам.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Загрузка баз пользователей для инвайта</li>
+                        <li>Выбор аккаунтов и настройка задержек</li>
+                        <li>Фильтрация аккаунтов перед запуском</li>
+                        <li>Статистика приглашений и отчёты</li>
+                        <li>Подробное логирование процесса</li>
+                    </ul>
+                </div>
+
+                <!-- Инвайт через администраторов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="feature-title">Инвайт через администраторов</h3>
+                    <p class="feature-description">
+                        Приглашение пользователей через аккаунты с правами администратора.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Использование админ-аккаунтов для инвайта</li>
+                        <li>Массовое добавление пользователей</li>
+                        <li>Поддержка нескольких администраторов</li>
+                        <li>Логирование всех действий</li>
+                    </ul>
+                </div>
+
+                <!-- Массовая подписка -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <h3 class="feature-title">Массовая подписка</h3>
+                    <p class="feature-description">
+                        Накрутка подписчиков за счёт массовой подписки аккаунтов на каналы.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Массовая подписка на заданные каналы</li>
+                        <li>Загрузка списка целевых каналов</li>
+                        <li>Выбор аккаунтов для выполнения задач</li>
+                        <li>Настраиваемые задержки</li>
+                        <li>Статистика подписок и логи</li>
+                    </ul>
+                </div>
+
+                <!-- Масслайкинг -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <h3 class="feature-title">Масслайкинг</h3>
+                    <p class="feature-description">
+                        Массовая постановка реакций на посты каналов и групп.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Работа по последним постам или спискам ссылок</li>
+                        <li>Выбор аккаунтов для реакций</li>
+                        <li>Настройка количества лайков на пост</li>
+                        <li>Выбор типа реакций (лайк, огонь, сердце и т.д.)</li>
+                        <li>Задержки, статистика и логирование</li>
+                    </ul>
+                </div>
+
+                <!-- Участие в опросах -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-poll"></i>
+                    </div>
+                    <h3 class="feature-title">Участие в опросах</h3>
+                    <p class="feature-description">
+                        Массовое участие аккаунтов в Telegram-опросах.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Выбор целевых опросов</li>
+                        <li>Настройка вариантов ответов</li>
+                        <li>Выбор аккаунтов и задержек</li>
+                        <li>Статистика и логирование участия</li>
+                    </ul>
+                </div>
+
+                <!-- Чекер номеров -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-phone-square"></i>
+                    </div>
+                    <h3 class="feature-title">Чекер номеров</h3>
+                    <p class="feature-description">
+                        Проверка телефонных номеров на регистрацию в Telegram с детальным отчётом.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Загрузка списков номеров в разных форматах</li>
+                        <li>Проверка регистрации в Telegram</li>
+                        <li>Получение username, имени, ID, Premium и др.</li>
+                        <li>Настройка полей отчёта</li>
+                        <li>Экспорт результатов (TXT, CSV)</li>
+                        <li>Выбор аккаунтов и задержек проверки</li>
+                    </ul>
+                </div>
+
+                <!-- Авторегистратор / Ручная регистрация -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3 class="feature-title">Авторегистратор / Ручная регистрация</h3>
+                    <p class="feature-description">
+                        Автоматическая и ручная регистрация Telegram-аккаунтов с интеграцией SMS-сервисов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Автоматическая и ручная регистрация номеров</li>
+                        <li>Интеграция с 5SIM, SMS-Activate, VAK-SMS</li>
+                        <li>Автоматическое получение SMS и Email-кодов</li>
+                        <li>Генерация параметров устройства</li>
+                        <li>Выбор страны, оператора и типа клиента</li>
+                        <li>Создание tdata и интеграция с AntiSafety</li>
+                    </ul>
+                </div>
+
+                <!-- Автоответчик -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-reply-all"></i>
+                    </div>
+                    <h3 class="feature-title">Автоответчик</h3>
+                    <p class="feature-description">
+                        Автоматические ответы на входящие сообщения по заданным правилам.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание правил по ключевым словам</li>
+                        <li>Настройка индивидуальных ответов</li>
+                        <li>Выбор аккаунтов для автоответчика</li>
+                        <li>Управление правилами (добавление, редактирование, удаление)</li>
+                        <li>Включение/выключение и мониторинг работы</li>
+                        <li>Логирование всех срабатываний</li>
+                    </ul>
+                </div>
+
+                <!-- Перехватчик -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Перехватчик</h3>
+                    <p class="feature-description">
+                        Перехват и пересылка сообщений из источников по ключевым словам.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Мониторинг каналов и групп по ключевым словам</li>
+                        <li>Пересылка в целевые чаты и каналы</li>
+                        <li>Режимы: форвард или репост с копией</li>
+                        <li>Замена слов и фраз в сообщениях</li>
+                        <li>Настройка минимальных пауз при FloodWait</li>
+                        <li>Выбор аккаунтов и логирование</li>
+                    </ul>
+                </div>
+
+                <!-- Прогрев аккаунтов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="feature-title">Прогрев аккаунтов</h3>
+                    <p class="feature-description">
+                        Постепенный прогрев новых аккаунтов за счёт естественной переписки.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание диалогов между аккаунтами</li>
+                        <li>Автоматическое формирование пар аккаунтов</li>
+                        <li>План прогрева по дням (рост активности)</li>
+                        <li>Естественные задержки между сообщениями</li>
+                        <li>Добавление в контакты и история активности</li>
+                        <li>Настройка количества сообщений и пауз</li>
+                    </ul>
+                </div>
+
+                <!-- Клонер каналов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clone"></i>
+                    </div>
+                    <h3 class="feature-title">Клонер каналов</h3>
+                    <p class="feature-description">
+                        Копирование постов из каналов-источников в целевые каналы с уникализацией.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Поддержка нескольких источников и целевых каналов</li>
+                        <li>Настройка глубины истории для копирования</li>
+                        <li>Задержки между отправками</li>
+                        <li>Исключение скрытых ссылок и медиафайлов</li>
+                        <li>Уникализация текста через ChatGPT</li>
+                        <li>Сохранение форматирования и логирование</li>
+                    </ul>
+                </div>
+
+                <!-- Клонер чатов -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Клонер чатов</h3>
+                    <p class="feature-description">
+                        Перенос истории переписки из чата-источника в целевой чат.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Настройка количества копируемых сообщений</li>
+                        <li>Настройка задержек между сообщениями</li>
+                        <li>Добавление имени исходного автора и времени</li>
+                        <li>Работа с несколькими аккаунтами-отправителями</li>
+                        <li>Создание эффекта живого общения</li>
+                        <li>Подробные логи работы</li>
+                    </ul>
+                </div>
+
+                <!-- Репортёр -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3 class="feature-title">Репортёр</h3>
+                    <p class="feature-description">
+                        Массовая отправка жалоб на каналы, чаты, пользователей и сообщения.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Разные типы жалоб (спам, фейк, насилие, порнография и др.)</li>
+                        <li>Загрузка списков ссылок разных форматов</li>
+                        <li>Выбор аккаунтов для отправки жалоб</li>
+                        <li>Настройка задержек между жалобами</li>
+                        <li>Статистика и логирование отправок</li>
+                    </ul>
+                </div>
+
+                <!-- Отложенный постинг -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Отложенный постинг</h3>
+                    <p class="feature-description">
+                        Планирование и автоматическая публикация постов в каналы и группы.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Создание сессий для разных аккаунтов и каналов</li>
+                        <li>Добавление постов с текстом и медиа</li>
+                        <li>Настройка даты и времени публикации</li>
+                        <li>Уникализация и стилизация текста постов</li>
+                        <li>Управление очередью, редактирование и удаление</li>
+                        <li>Просмотр статуса публикации и логи</li>
+                    </ul>
+                </div>
+
+                <!-- Редактор каналов (дополнительный модуль) -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3 class="feature-title">Редактор каналов</h3>
+                    <p class="feature-description">
+                        Автоматическая генерация и обновление контента в каналах через ChatGPT.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Генерация контента через ChatGPT по вашим промтам</li>
+                        <li>Автоматический запуск по расписанию</li>
+                        <li>Работа с несколькими целевыми каналами</li>
+                        <li>Гибкая настройка шаблонов и стиля</li>
+                    </ul>
+                </div>
+
+                <!-- Заполнение профилей (дополнительный модуль) -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Заполнение профилей</h3>
+                    <p class="feature-description">
+                        Массовое оформление профилей аккаунтов готовыми наборами данных.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Мужские, женские и случайные наборы профилей</li>
+                        <li>Заполнение имени, username и аватара</li>
+                        <li>Автоматическая генерация username</li>
+                        <li>Массовая обработка сразу множества аккаунтов</li>
+                    </ul>
+                </div>
+
+                <!-- Установка истории -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="feature-title">Установка истории</h3>
+                    <p class="feature-description">
+                        Массовая установка и удаление Stories в профилях Telegram аккаунтов с поддержкой разных медиаформатов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Массовая установка Stories в профили аккаунтов</li>
+                        <li>Удаление Stories из профилей</li>
+                        <li>Отметка пользователей в Stories</li>
+                        <li>Поддержка разных форматов (фото, видео)</li>
+                        <li>Загрузка медиафайлов для Stories</li>
+                        <li>Выбор аккаунтов и настройка параметров публикации</li>
+                    </ul>
+                </div>
+
+                <!-- Дополнительные возможности -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Дополнительные возможности</h3>
+                    <p class="feature-description">
+                        Инфраструктурные функции, которые делают работу софта стабильной и удобной.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Централизованное управление всеми задачами и аккаунтами</li>
+                        <li>Распределение нагрузки и многопоточная обработка</li>
+                        <li>Обработка FloodWait и устойчивость к ошибкам</li>
+                        <li>Детальное логирование и экспорт результатов</li>
+                        <li>Фильтрация и поиск по данным в интерфейсе</li>
+                        <li>Интеграции с внешними сервисами (SMS, AntiSafety, ChatGPT)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="advantages-section">
+        <!-- 3D анимированный фон -->
+        <div class="animated-3d-background">
+            <div class="particle-3d particle-1"></div>
+            <div class="particle-3d particle-2"></div>
+            <div class="particle-3d particle-3"></div>
+            <div class="particle-3d particle-4"></div>
+            <div class="particle-3d particle-5"></div>
+            <div class="particle-3d particle-6"></div>
+            <div class="particle-3d particle-7"></div>
+            <div class="particle-3d particle-8"></div>
+            <div class="wireframe-3d wire-1"></div>
+            <div class="wireframe-3d wire-2"></div>
+            <div class="wireframe-3d wire-3"></div>
+            <div class="orb-3d orb-1"></div>
+            <div class="orb-3d orb-2"></div>
+            <div class="orb-3d orb-3"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Почему выбирают TeleBoosting?</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Учет пожеланий клиентов</h4>
+                    <p>Все пожелания клиентов учитываются. Клиенты могут заявлять о доработке программы бесплатно.</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Безопасность</h4>
+                    <p>Авторизация только через tdata, защита от блокировок, работа с прокси</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Производительность</h4>
+                    <p>Асинхронная обработка, многопоточность, параллельная работа модулей</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Статистика</h4>
+                    <p>Детальная статистика в реальном времени, отчеты и логи всех операций</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h4>Интеграции</h4>
+                    <p>Интеграция с ChatGPT для уникализации контента и генерации постов</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Удобство</h4>
+                    <p>Современный веб-интерфейс, интуитивная навигация, автосохранение настроек</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / CTA Section -->
+    <section id="pricing" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Хотели бы попробовать бесплатно или купить лицензию?</h2>
+                <p class="cta-description">
+                    Присоединяйтесь к тысячам пользователей, которые уже используют TeleBoosting для автоматизации работы с Telegram
+                </p>
+
+                <div class="pricing-grid">
+                    <!-- FREE -->
+                    <div class="pricing-card pricing-card-free">
+                        <div class="pricing-badge">FREE</div>
+                        <h3 class="pricing-title">Бесплатный доступ</h3>
+                        <div class="pricing-price">0 ₽</div>
+                        <p class="pricing-period">24 часа полного доступа</p>
+                        <ul class="pricing-features">
+                            <li>Все модули и функционал без ограничений</li>
+                            <li>Оцените интерфейс и скорость работы</li>
+                            <li>Поддержка в Telegram по любым вопросам</li>
+                        </ul>
+                        <a href="https://t.me/teleboosting_soft_bot" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-primary">
+                            Получить
+                        </a>
+                    </div>
+
+                    <!-- 7 дней -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">7 дней</h3>
+                        <div class="pricing-price">2 490 ₽</div>
+                        <p class="pricing-period">Неделя полной работы</p>
+                        <ul class="pricing-features">
+                            <li>Полный доступ ко всем модулям</li>
+                            <li>Поддержка и помощь в настройке</li>
+                            <li>Отличный вариант для теста гипотез</li>
+                        </ul>
+                        <a href="https://t.me/teleboosting_soft_bot" target="_blank" rel="noopener noreferrer" class="pricing-btn">
+                            Купить
+                        </a>
+                    </div>
+
+                    <!-- 14 дней -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">14 дней</h3>
+                        <div class="pricing-price">4 690 ₽</div>
+                        <p class="pricing-period">Оптимальный формат</p>
+                        <ul class="pricing-features">
+                            <li>2 недели активной работы с проектами</li>
+                            <li>Приоритетная поддержка</li>
+                            <li>Выгоднее, чем продление на 7+7</li>
+                        </ul>
+                        <a href="https://t.me/teleboosting_soft_bot" target="_blank" rel="noopener noreferrer" class="pricing-btn">
+                            Купить
+                        </a>
+                    </div>
+
+                    <!-- 30 дней -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">30 дней</h3>
+                        <div class="pricing-price">6 990 ₽</div>
+                        <p class="pricing-period">Максимальная выгода</p>
+                        <ul class="pricing-features">
+                            <li>Полный месяц без ограничений</li>
+                            <li>Лучшее решение для постоянной работы</li>
+                            <li>Все обновления и доработки включены</li>
+                        </ul>
+                        <a href="https://t.me/teleboosting_soft_bot" target="_blank" rel="noopener noreferrer" class="pricing-btn">
+                            Купить
+                        </a>
+                    </div>
+
+                    <!-- 365 дней -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">365 дней</h3>
+                        <div class="pricing-price">14 990 ₽</div>
+                        <p class="pricing-period">Год максимальных возможностей</p>
+                        <ul class="pricing-features">
+                            <li>12 месяцев использования без ограничений</li>
+                            <li>Максимальная выгода по стоимости</li>
+                            <li>Все обновления и доработки в течение года</li>
+                        </ul>
+                        <a href="https://t.me/teleboosting_soft_bot" target="_blank" rel="noopener noreferrer" class="pricing-btn">
+                            Купить
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="https://t.me/teleboosting_soft_bot" class="btn btn-cta-primary" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-envelope"></i> Связаться с нами
+                    </a>
+                    <a href="#features" class="btn btn-cta-secondary">
+                        <i class="fas fa-info-circle"></i> Узнать больше
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="download-buttons">
+                <a href="#" class="download-btn download-btn-windows">
+                    <i class="fab fa-windows"></i>
+                    <span>Скачать для Windows</span>
+                </a>
+                <a href="#" class="download-btn download-btn-mac">
+                    <i class="fab fa-apple"></i>
+                    <span>Скачать для MacOS</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-telegram"></i>
+                    <span>@teleboosting_soft</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
+
