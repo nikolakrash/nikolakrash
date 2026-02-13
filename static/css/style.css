@@ -903,51 +903,133 @@ body {
     filter: brightness(1.25) contrast(1.15) saturate(1.2);
 }
 
-/* Media Carousel Section - Fullscreen */
-.media-carousel-section {
-    width: 100vw;
-    height: 100vh;
+/* Media Slider Section */
+.media-slider-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
+}
+
+.media-slider-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.media-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     background: #000;
 }
 
-.media-carousel {
+.slider-track {
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-    height: 100%;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .media-item {
     flex: 0 0 100%;
-    width: 100vw;
-    height: 100vh;
-    scroll-snap-align: start;
+    width: 100%;
     position: relative;
     overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.media-item video,
-.media-item img {
+.media-item img,
+.media-item video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
     display: block;
 }
 
-/* Скрыть скроллбар */
-.media-carousel::-webkit-scrollbar {
-    display: none;
+.media-item video {
+    max-height: 80vh;
 }
 
-.media-carousel {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+/* Кнопки навигации */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #667eea;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slider-btn:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.slider-btn-prev {
+    left: -70px;
+}
+
+.slider-btn-next {
+    right: -70px;
+}
+
+.slider-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Индикаторы */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.slider-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    border: none;
+}
+
+.slider-indicator:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.2);
+}
+
+.slider-indicator.active {
+    background: #fff;
+    width: 30px;
+    border-radius: 6px;
 }
 
 /* Advantages Section */
@@ -1332,16 +1414,55 @@ body {
         gap: 30px;
     }
     
-    /* Media Carousel - fullscreen на всех устройствах */
-    .media-carousel-section {
-        width: 100vw;
-        height: 100vh;
+    /* Media Slider - адаптация для мобильных */
+    .media-slider-section {
+        padding: 40px 10px;
+    }
+    
+    .media-slider-wrapper {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .media-slider {
+        border-radius: 15px;
     }
     
     .media-item {
-        flex: 0 0 100%;
-        width: 100vw;
-        height: 100vh;
+        min-height: 300px;
+    }
+    
+    .media-item img,
+    .media-item video {
+        max-height: 60vh;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .slider-btn-prev {
+        left: 10px;
+    }
+    
+    .slider-btn-next {
+        right: 10px;
+    }
+    
+    .slider-indicators {
+        margin-top: 20px;
+        gap: 8px;
+    }
+    
+    .slider-indicator {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .slider-indicator.active {
+        width: 25px;
     }
     
     /* Features Grid - горизонтальный скролл для мобильных */
