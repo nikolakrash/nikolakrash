@@ -15,19 +15,20 @@ body {
 /* Header */
 .navbar {
     padding: 1rem 0;
-    box-shadow: none;
-    background: transparent !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(102, 126, 234, 0.95) !important;
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar.scrolled {
-    background: rgba(102, 126, 234, 0.95) !important;
-    backdrop-filter: blur(10px);
+    background: rgba(102, 126, 234, 0.98) !important;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -55,6 +56,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-top: 80px; /* Отступ для фиксированного navbar */
 }
 
 /* Видео фон */
