@@ -121,126 +121,9 @@ body {
     margin-bottom: 20px;
     line-height: 1.1;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.hero-title:not(.hero-shutter-text) {
     animation: fadeInUp 0.8s ease-out;
     opacity: 0;
     animation-fill-mode: forwards;
-}
-
-/* Shutter Text Effect */
-.hero-shutter-text {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
-    overflow: visible;
-}
-
-.shutter-word {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 0;
-}
-
-.shutter-char {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0 0.1vw;
-}
-
-.shutter-char-base {
-    display: inline-block;
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1;
-    color: white;
-    opacity: 0;
-    filter: blur(10px);
-    animation: charFadeIn 0.8s ease-out forwards;
-}
-
-.shutter-char-slice {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.shutter-char-slice-top {
-    color: #667eea;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-    animation: shutterTop 0.7s ease-in-out forwards;
-}
-
-.shutter-char-slice-middle {
-    color: rgba(255, 255, 255, 0.8);
-    clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%);
-    animation: shutterMiddle 0.7s ease-in-out forwards;
-}
-
-.shutter-char-slice-bottom {
-    color: #667eea;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    animation: shutterBottom 0.7s ease-in-out forwards;
-}
-
-@keyframes charFadeIn {
-    to {
-        opacity: 1;
-        filter: blur(0px);
-    }
-}
-
-@keyframes shutterTop {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
-@keyframes shutterMiddle {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-@keyframes shutterBottom {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
 }
 
 .hero-subtitle {
@@ -1518,12 +1401,6 @@ body {
     
     .hero-subtitle {
         font-size: 1rem;
-    }
-    
-    /* Shutter Text адаптация для мобильных */
-    .shutter-char-base,
-    .shutter-char-slice {
-        font-size: 2rem !important;
     }
     
     .features-grid {
