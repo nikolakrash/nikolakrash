@@ -32,8 +32,38 @@ body {
 }
 
 .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.brand-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-title {
     font-size: 1.5rem;
     font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
 }
 
 .navbar-nav .nav-link {
@@ -1377,6 +1407,22 @@ body {
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    .brand-logo {
+        height: 40px;
+    }
+    
+    .brand-title {
+        font-size: 1.2rem;
+    }
+    
+    .brand-subtitle {
+        font-size: 0.65rem;
+    }
+    
+    .navbar-brand {
+        gap: 8px;
+    }
+    
     .hero-content {
         padding: 40px 30px;
     }
