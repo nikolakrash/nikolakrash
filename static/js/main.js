@@ -125,3 +125,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Медиа-слайдер вынесен в отдельный файл media-slider.js
+
+// Shutter Text Effect
+document.addEventListener('DOMContentLoaded', function() {
+    const shutterText = document.querySelector('.hero-shutter-text .shutter-word');
+    if (!shutterText) return;
+    
+    const text = shutterText.textContent.trim();
+    shutterText.textContent = ''; // Очищаем текст
+    
+    // Разбиваем на буквы и создаем структуру
+    text.split('').forEach((char, index) => {
+        const charWrapper = document.createElement('span');
+        charWrapper.className = 'shutter-char';
+        
+        // Базовый слой (основная буква)
+        const baseChar = document.createElement('span');
+        baseChar.className = 'shutter-char-base';
+        baseChar.textContent = char === ' ' ? '\u00A0' : char;
+        baseChar.style.animationDelay = `${index * 0.04 + 0.3}s`;
+        charWrapper.appendChild(baseChar);
+        
+        // Верхний слой
+        const topSlice = document.createElement('span');
+        topSlice.className = 'shutter-char-slice shutter-char-slice-top';
+        topSlice.textContent = char === ' ' ? '\u00A0' : char;
+        topSlice.style.animationDelay = `${index * 0.04}s`;
+        charWrapper.appendChild(topSlice);
+        
+        // Средний слой
+        const middleSlice = document.createElement('span');
+        middleSlice.className = 'shutter-char-slice shutter-char-slice-middle';
+        middleSlice.textContent = char === ' ' ? '\u00A0' : char;
+        middleSlice.style.animationDelay = `${index * 0.04 + 0.1}s`;
+        charWrapper.appendChild(middleSlice);
+        
+        // Нижний слой
+        const bottomSlice = document.createElement('span');
+        bottomSlice.className = 'shutter-char-slice shutter-char-slice-bottom';
+        bottomSlice.textContent = char === ' ' ? '\u00A0' : char;
+        bottomSlice.style.animationDelay = `${index * 0.04 + 0.2}s`;
+        charWrapper.appendChild(bottomSlice);
+        
+        shutterText.appendChild(charWrapper);
+    });
+});
