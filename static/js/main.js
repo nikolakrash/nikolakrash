@@ -123,3 +123,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// Автозапуск видео в медиа-карусели когда они видимы
+document.addEventListener('DOMContentLoaded', function() {
+    const mediaCarousel = document.querySelector('.media-carousel');
+    if (!mediaCarousel) return;
+    
+    const allVideos = mediaCarousel.querySelectorAll('video');
+    
+    // Автозапуск видео когда оно видно
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                // Видео видно - запускаем
+                video.play().catch(err => {
+                    console.log('Автозапуск видео заблокирован браузером:', err);
+                });
+            } else {
+                // Видео не видно - останавливаем
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.5 // Видео считается видимым если 50% видно
+    });
+    
+    // Наблюдаем за всеми видео
+    allVideos.forEach(video => {
+        videoObserver.observe(video);
+    });
+});
