@@ -171,6 +171,21 @@
             margin-bottom: 0.5rem;
         }
 
+        .guide-section img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .guide-section h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1a73e8;
+            font-size: 1.5rem;
+        }
+
         .back-to-home {
             margin-bottom: 2rem;
         }
@@ -198,7 +213,7 @@
         <div class="sidebar-header">
             <a href="index.html" class="sidebar-logo">
                 <i class="fas fa-rocket"></i>
-                <span>TeleBoosting</span>
+                <span>Руководство</span>
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -380,7 +395,35 @@
             <!-- Секция: Менеджер аккаунтов -->
             <div class="guide-section active" id="section-accounts">
                 <h2><i class="fas fa-users"></i> Менеджер аккаунтов</h2>
-                <p>Описание работы модуля "Менеджер аккаунтов" будет здесь.</p>
+                
+                <h3>Добавление существующего аккаунта в софт</h3>
+                <img src="static/images/accounts-add-1.png" alt="Добавление аккаунта">
+                
+                <p><strong>Выбор страны</strong> - для автоопределения timezone и языка системы</p>
+                <p><strong>Тип клиента</strong> - если у вас уже выполнен вход с телефона, то выбирайте тип Desktop.</p>
+                <p><strong>Рандомное устройство</strong> - при выборе рандомного устройства генерируются случайные параметры для Desktop (Версия ОС, Версия Telegram Desktop, Разрешение экрана, RAM) и записываются в json.</p>
+                <p><strong>Выбрать устройство с параметрами из базы</strong> - Заранее можно сгенерировать базу параметров для Desktop версии (Версия ОС, Версия Telegram Desktop, Разрешение экрана, RAM)</p>
+                
+                <img src="static/images/accounts-add-2.png" alt="Настройки аккаунта">
+                
+                <p><strong>Номер телефона</strong> - в международном формате с (+)</p>
+                <p><strong>API ключ</strong> - подставляются автоматически при выборе типа клиента Telegram.</p>
+                <p>Для Desktop версии:</p>
+                <ul>
+                    <li>API ID: 2040</li>
+                    <li>API HASH: b18441a1ff607e10a989891a5462e627</li>
+                </ul>
+                <p>Для Android Telegram:</p>
+                <ul>
+                    <li>API ID: 4</li>
+                    <li>API HASH: 014b35b6184100b085b0d0572f9b5103</li>
+                </ul>
+                <p>Для Android Telegram X:</p>
+                <ul>
+                    <li>API ID: 21724</li>
+                    <li>API HASH: 3e0cb5efcd52300aec5994fdfc5bdc16</li>
+                </ul>
+                <p><strong>Прокси</strong> - можно добавить новые прямо с этого окна, либо выбрать уже добавленные прокси с модуля "Прокси"</p>
             </div>
 
             <!-- Секция: Прокси -->
