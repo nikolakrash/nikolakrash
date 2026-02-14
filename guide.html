@@ -223,10 +223,17 @@
                     <i class="fas fa-home"></i>
                     <span>Главная</span>
                 </a>
-                <a href="#" class="nav-item active" data-section="accounts">
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-accounts" role="button" aria-expanded="true" aria-controls="nav-accounts">
                     <i class="fas fa-users"></i>
                     <span>Менеджер аккаунтов</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
                 </a>
+                <div class="collapse nav-submenu show" id="nav-accounts">
+                    <a href="#" class="nav-item nav-subitem active" data-section="accounts-add">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Добавление существующего аккаунта в софт</span>
+                    </a>
+                </div>
                 <a href="#" class="nav-item" data-section="proxies">
                     <i class="fas fa-globe"></i>
                     <span>Прокси</span>
@@ -392,11 +399,9 @@
                 </a>
             </div>
 
-            <!-- Секция: Менеджер аккаунтов -->
-            <div class="guide-section active" id="section-accounts">
-                <h2><i class="fas fa-users"></i> Менеджер аккаунтов</h2>
-                
-                <h3>Добавление существующего аккаунта в софт</h3>
+            <!-- Секция: Добавление существующего аккаунта в софт -->
+            <div class="guide-section active" id="section-accounts-add">
+                <h2><i class="fas fa-user-plus"></i> Добавление существующего аккаунта в софт</h2>
                 <img src="static/images/accounts-add-1.png" alt="Добавление аккаунта">
                 
                 <p><strong>Выбор страны</strong> - для автоопределения timezone и языка системы</p>
@@ -588,6 +593,24 @@
     <script>
         // Переключение между секциями
         document.addEventListener('DOMContentLoaded', function() {
+            // Раскрываем подменю, если активный пункт находится внутри него
+            const activeItem = document.querySelector('.nav-item.active');
+            if (activeItem) {
+                const submenu = activeItem.closest('.nav-submenu.collapse');
+                if (submenu && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                    new bootstrap.Collapse(submenu, { show: true });
+                    const toggle = document.querySelector(`[href="#${submenu.id}"]`);
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'true');
+                        const icon = toggle.querySelector('.nav-chevron');
+                        if (icon) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
+                    }
+                }
+            }
+
             const navItems = document.querySelectorAll('.nav-item[data-section]');
             const sections = document.querySelectorAll('.guide-section');
 
