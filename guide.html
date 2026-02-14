@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Руководство - TeleBoosting</title>
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+
+        .app-sidebar {
+            width: 280px;
+            background: #1a1a1a;
+            color: #fff;
+            flex-shrink: 0;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .sidebar-logo:hover {
+            opacity: 0.8;
+        }
+
+        .sidebar-logo i {
+            font-size: 1.5rem;
+            color: #1a73e8;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: #2a2a2a;
+            color: #fff;
+            border-left-color: #1a73e8;
+        }
+
+        .nav-item.active {
+            background: #2a2a2a;
+            color: #1a73e8;
+            border-left-color: #1a73e8;
+            font-weight: 500;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-item.nav-group-toggle {
+            cursor: pointer;
+        }
+
+        .nav-item .nav-chevron {
+            margin-left: auto;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .nav-submenu {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .nav-submenu .nav-item.nav-subitem {
+            padding-left: 2.25rem;
+            font-size: 0.95rem;
+        }
+
+        .app-main {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .guide-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .guide-section {
+            display: none;
+        }
+
+        .guide-section.active {
+            display: block;
+        }
+
+        .guide-section h2 {
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #1a73e8;
+        }
+
+        .guide-section h3 {
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section ul {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-home {
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .app-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .app-main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Боковое меню -->
+    <aside class="app-sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-rocket"></i>
+                <span>TeleBoosting</span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Основное</div>
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Главная</span>
+                </a>
+                <a href="#" class="nav-item active" data-section="accounts">
+                    <i class="fas fa-users"></i>
+                    <span>Менеджер аккаунтов</span>
+                </a>
+                <a href="#" class="nav-item" data-section="proxies">
+                    <i class="fas fa-globe"></i>
+                    <span>Прокси</span>
+                </a>
+                <a href="#" class="nav-item" data-section="device-params">
+                    <i class="fas fa-cogs"></i>
+                    <span>Генератор параметров</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Модули</div>
+                <!-- Рассылки -->
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-broadcasts" role="button" aria-expanded="false" aria-controls="nav-broadcasts">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Рассылки</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
+                </a>
+                <div class="collapse nav-submenu" id="nav-broadcasts">
+                    <a href="#" class="nav-item nav-subitem" data-section="broadcast-dm">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Рассылка в ЛС</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="broadcast-groups">
+                        <i class="fas fa-users"></i>
+                        <span>Рассылка по группам</span>
+                    </a>
+                </div>
+
+                <!-- Сбор аудитории -->
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-audience" role="button" aria-expanded="false" aria-controls="nav-audience">
+                    <i class="fas fa-user-group"></i>
+                    <span>Сбор аудитории</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
+                </a>
+                <div class="collapse nav-submenu" id="nav-audience">
+                    <a href="#" class="nav-item nav-subitem" data-section="parser">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Парсер</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="parser-dm">
+                        <i class="fas fa-comments"></i>
+                        <span>Парсер ЛС</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="audience-filtering">
+                        <i class="fas fa-filter"></i>
+                        <span>Фильтрация базы</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="audience-exclusion">
+                        <i class="fas fa-user-minus"></i>
+                        <span>Исключение баз</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="audience-link-checker">
+                        <i class="fas fa-link"></i>
+                        <span>Проверка ссылок</span>
+                    </a>
+                </div>
+
+                <!-- Массовое создание -->
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-mass-create" role="button" aria-expanded="false" aria-controls="nav-mass-create">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Массовое создание</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
+                </a>
+                <div class="collapse nav-submenu" id="nav-mass-create">
+                    <a href="#" class="nav-item nav-subitem" data-section="mass-groups">
+                        <i class="fas fa-people-arrows"></i>
+                        <span>Массовое создание групп</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="mass-channels">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <span>Массовое создание каналов</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="mass-bots">
+                        <i class="fas fa-robot"></i>
+                        <span>Массовое создание ботов</span>
+                    </a>
+                </div>
+
+                <!-- Инвайтинг -->
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-inviting" role="button" aria-expanded="false" aria-controls="nav-inviting">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Инвайтинг</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
+                </a>
+                <div class="collapse nav-submenu" id="nav-inviting">
+                    <a href="#" class="nav-item nav-subitem" data-section="inviter">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Инвайтер</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="invite-via-admins">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Инвайт через администраторов</span>
+                    </a>
+                </div>
+
+                <!-- Накрутка -->
+                <a class="nav-item nav-group-toggle" data-bs-toggle="collapse" href="#nav-boost" role="button" aria-expanded="false" aria-controls="nav-boost">
+                    <i class="fas fa-bolt"></i>
+                    <span>Накрутка</span>
+                    <i class="fas fa-chevron-down nav-chevron"></i>
+                </a>
+                <div class="collapse nav-submenu" id="nav-boost">
+                    <a href="#" class="nav-item nav-subitem" data-section="channel-subscriber">
+                        <i class="fas fa-bell"></i>
+                        <span>Массовая подписка</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="mass-liking">
+                        <i class="fas fa-heart"></i>
+                        <span>Масслайкинг</span>
+                    </a>
+                    <a href="#" class="nav-item nav-subitem" data-section="poll-voting">
+                        <i class="fas fa-poll"></i>
+                        <span>Участие в опросах</span>
+                    </a>
+                </div>
+
+                <a href="#" class="nav-item" data-section="phone-checker">
+                    <i class="fas fa-phone"></i>
+                    <span>Чекер номеров</span>
+                </a>
+                <a href="#" class="nav-item" data-section="auto-reg">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Авторегистратор</span>
+                </a>
+                <a href="#" class="nav-item" data-section="auto-reply">
+                    <i class="fas fa-robot"></i>
+                    <span>Автоответчик</span>
+                </a>
+                <a href="#" class="nav-item" data-section="interceptor">
+                    <i class="fas fa-rss"></i>
+                    <span>Перехватчик</span>
+                </a>
+                <a href="#" class="nav-item" data-section="account-warmup">
+                    <i class="fas fa-fire"></i>
+                    <span>Прогрев аккаунтов</span>
+                </a>
+                <a href="#" class="nav-item" data-section="cloner">
+                    <i class="fas fa-clone"></i>
+                    <span>Клонер каналов</span>
+                </a>
+                <a href="#" class="nav-item" data-section="chat-cloner">
+                    <i class="fas fa-comments"></i>
+                    <span>Клонер чатов</span>
+                </a>
+                <a href="#" class="nav-item" data-section="reporter">
+                    <i class="fas fa-flag"></i>
+                    <span>Репортёр</span>
+                </a>
+                <a href="#" class="nav-item" data-section="scheduler">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Отложенный постинг</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Основной контент -->
+    <main class="app-main">
+        <div class="guide-content">
+            <div class="back-to-home">
+                <a href="index.html" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left"></i> Вернуться на главную
+                </a>
+            </div>
+
+            <!-- Секция: Менеджер аккаунтов -->
+            <div class="guide-section active" id="section-accounts">
+                <h2><i class="fas fa-users"></i> Менеджер аккаунтов</h2>
+                <p>Описание работы модуля "Менеджер аккаунтов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Прокси -->
+            <div class="guide-section" id="section-proxies">
+                <h2><i class="fas fa-globe"></i> Прокси</h2>
+                <p>Описание работы модуля "Прокси" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Генератор параметров -->
+            <div class="guide-section" id="section-device-params">
+                <h2><i class="fas fa-cogs"></i> Генератор параметров</h2>
+                <p>Описание работы модуля "Генератор параметров" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Рассылка в ЛС -->
+            <div class="guide-section" id="section-broadcast-dm">
+                <h2><i class="fas fa-paper-plane"></i> Рассылка в личные сообщения</h2>
+                <p>Описание работы модуля "Рассылка в ЛС" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Рассылка по группам -->
+            <div class="guide-section" id="section-broadcast-groups">
+                <h2><i class="fas fa-users"></i> Рассылка по группам</h2>
+                <p>Описание работы модуля "Рассылка по группам" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Парсер -->
+            <div class="guide-section" id="section-parser">
+                <h2><i class="fas fa-users-cog"></i> Парсер</h2>
+                <p>Описание работы модуля "Парсер" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Парсер ЛС -->
+            <div class="guide-section" id="section-parser-dm">
+                <h2><i class="fas fa-comments"></i> Парсер ЛС</h2>
+                <p>Описание работы модуля "Парсер ЛС" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Фильтрация базы -->
+            <div class="guide-section" id="section-audience-filtering">
+                <h2><i class="fas fa-filter"></i> Фильтрация базы</h2>
+                <p>Описание работы модуля "Фильтрация базы" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Исключение баз -->
+            <div class="guide-section" id="section-audience-exclusion">
+                <h2><i class="fas fa-user-minus"></i> Исключение баз</h2>
+                <p>Описание работы модуля "Исключение баз" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Проверка ссылок -->
+            <div class="guide-section" id="section-audience-link-checker">
+                <h2><i class="fas fa-link"></i> Проверка ссылок</h2>
+                <p>Описание работы модуля "Проверка ссылок" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Массовое создание групп -->
+            <div class="guide-section" id="section-mass-groups">
+                <h2><i class="fas fa-people-arrows"></i> Массовое создание групп</h2>
+                <p>Описание работы модуля "Массовое создание групп" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Массовое создание каналов -->
+            <div class="guide-section" id="section-mass-channels">
+                <h2><i class="fas fa-broadcast-tower"></i> Массовое создание каналов</h2>
+                <p>Описание работы модуля "Массовое создание каналов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Массовое создание ботов -->
+            <div class="guide-section" id="section-mass-bots">
+                <h2><i class="fas fa-robot"></i> Массовое создание ботов</h2>
+                <p>Описание работы модуля "Массовое создание ботов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Инвайтер -->
+            <div class="guide-section" id="section-inviter">
+                <h2><i class="fas fa-user-plus"></i> Инвайтер</h2>
+                <p>Описание работы модуля "Инвайтер" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Инвайт через администраторов -->
+            <div class="guide-section" id="section-invite-via-admins">
+                <h2><i class="fas fa-user-shield"></i> Инвайт через администраторов</h2>
+                <p>Описание работы модуля "Инвайт через администраторов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Массовая подписка -->
+            <div class="guide-section" id="section-channel-subscriber">
+                <h2><i class="fas fa-bell"></i> Массовая подписка</h2>
+                <p>Описание работы модуля "Массовая подписка" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Масслайкинг -->
+            <div class="guide-section" id="section-mass-liking">
+                <h2><i class="fas fa-heart"></i> Масслайкинг</h2>
+                <p>Описание работы модуля "Масслайкинг" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Участие в опросах -->
+            <div class="guide-section" id="section-poll-voting">
+                <h2><i class="fas fa-poll"></i> Участие в опросах</h2>
+                <p>Описание работы модуля "Участие в опросах" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Чекер номеров -->
+            <div class="guide-section" id="section-phone-checker">
+                <h2><i class="fas fa-phone"></i> Чекер номеров</h2>
+                <p>Описание работы модуля "Чекер номеров" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Авторегистратор -->
+            <div class="guide-section" id="section-auto-reg">
+                <h2><i class="fas fa-user-plus"></i> Авторегистратор</h2>
+                <p>Описание работы модуля "Авторегистратор" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Автоответчик -->
+            <div class="guide-section" id="section-auto-reply">
+                <h2><i class="fas fa-robot"></i> Автоответчик</h2>
+                <p>Описание работы модуля "Автоответчик" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Перехватчик -->
+            <div class="guide-section" id="section-interceptor">
+                <h2><i class="fas fa-rss"></i> Перехватчик</h2>
+                <p>Описание работы модуля "Перехватчик" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Прогрев аккаунтов -->
+            <div class="guide-section" id="section-account-warmup">
+                <h2><i class="fas fa-fire"></i> Прогрев аккаунтов</h2>
+                <p>Описание работы модуля "Прогрев аккаунтов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Клонер каналов -->
+            <div class="guide-section" id="section-cloner">
+                <h2><i class="fas fa-clone"></i> Клонер каналов</h2>
+                <p>Описание работы модуля "Клонер каналов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Клонер чатов -->
+            <div class="guide-section" id="section-chat-cloner">
+                <h2><i class="fas fa-comments"></i> Клонер чатов</h2>
+                <p>Описание работы модуля "Клонер чатов" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Репортёр -->
+            <div class="guide-section" id="section-reporter">
+                <h2><i class="fas fa-flag"></i> Репортёр</h2>
+                <p>Описание работы модуля "Репортёр" будет здесь.</p>
+            </div>
+
+            <!-- Секция: Отложенный постинг -->
+            <div class="guide-section" id="section-scheduler">
+                <h2><i class="far fa-calendar-alt"></i> Отложенный постинг</h2>
+                <p>Описание работы модуля "Отложенный постинг" будет здесь.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Переключение между секциями
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item[data-section]');
+            const sections = document.querySelectorAll('.guide-section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Убираем активный класс со всех пунктов меню
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    
+                    // Добавляем активный класс к текущему пункту
+                    item.classList.add('active');
+                    
+                    // Скрываем все секции
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Показываем нужную секцию
+                    const sectionId = 'section-' + item.getAttribute('data-section');
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                        // Прокручиваем к началу страницы
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Иконка стрелки для раскрывающихся групп
+            document.querySelectorAll('.nav-group-toggle[data-bs-toggle="collapse"]').forEach(toggle => {
+                const target = toggle.getAttribute('href');
+                if (!target || !target.startsWith('#')) return;
+                const el = document.querySelector(target);
+                if (!el) return;
+                el.addEventListener('shown.bs.collapse', () => {
+                    const icon = toggle.querySelector('.nav-chevron');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                });
+                el.addEventListener('hidden.bs.collapse', () => {
+                    const icon = toggle.querySelector('.nav-chevron');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
