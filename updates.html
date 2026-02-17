@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Обновления - TeleBoosting</title>
+    <meta name="description" content="Последние обновления и улучшения TeleBoosting. Новые функции, исправления и доработки платформы.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .updates-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .updates-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .updates-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .updates-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .update-block {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .update-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .update-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .update-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .update-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .update-date i {
+            font-size: 1.2rem;
+        }
+
+        .update-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .update-content {
+            color: #333;
+        }
+
+        .update-item {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .update-item:hover {
+            background: #f0f4ff;
+            border-left-color: #764ba2;
+        }
+
+        .update-item-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .update-item-title i {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .update-item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.75rem 0 0 0;
+        }
+
+        .update-item-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .update-item-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .update-item-list li.sub-item {
+            padding-left: 2.5rem;
+            font-size: 0.95rem;
+            color: #718096;
+        }
+
+        .update-item-list li.sub-item::before {
+            content: '•';
+            color: #764ba2;
+            font-size: 1.5rem;
+            line-height: 0.5;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #fff;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .updates-header h1 {
+                font-size: 2rem;
+            }
+
+            .update-block {
+                padding: 1.5rem;
+            }
+
+            .update-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-rocket"></i> TeleBoosting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">Возможности</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#advantages">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#pricing">Цены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#download">Скачать</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="guide.html">Руководство</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="updates.html">Обновления</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="updates-container">
+        <div class="updates-header">
+            <h1><i class="fas fa-sync-alt"></i> Обновления</h1>
+            <p>Последние изменения и улучшения платформы</p>
+        </div>
+
+        <div id="updates-list">
+            <!-- Обновления от 17.02.2026 -->
+            <div class="update-block">
+                <div class="update-header">
+                    <div class="update-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>17 февраля 2026</span>
+                    </div>
+                    <span class="update-badge">Новое</span>
+                </div>
+                <div class="update-content">
+                    <!-- Пункт 1: Отметка пользователей -->
+                    <div class="update-item">
+                        <div class="update-item-title">
+                            <i class="fas fa-user-tag"></i>
+                            Добавили отметку пользователей в рассылке по группам
+                        </div>
+                        <ul class="update-item-list">
+                            <li>Список @username для отметок</li>
+                            <li>Количество отметок в сообщении: диапазон "от/до" (берется случайное значение из диапазона)</li>
+                            <li>Опция "Скрыть @username в тексте"</li>
+                        </ul>
+                    </div>
+
+                    <!-- Пункт 2: Скрытие текста -->
+                    <div class="update-item">
+                        <div class="update-item-title">
+                            <i class="fas fa-eye-slash"></i>
+                            Пофиксили скрытие текста в рассылках
+                        </div>
+                        <ul class="update-item-list">
+                            <li>Рассылка по группам: скрытие работает для:
+                                <ul class="update-item-list">
+                                    <li class="sub-item">ручного текста в формате ||скрытый текст||</li>
+                                    <li class="sub-item">@username в тексте (при включенном переключателе)</li>
+                                    <li class="sub-item">блока добавленных отметок (при включенном переключателе)</li>
+                                </ul>
+                            </li>
+                            <li>Рассылка в ЛС: скрытие текста ||...|| приведено к тому же механизму, что и в рассылке по группам</li>
+                        </ul>
+                    </div>
+
+                    <!-- Пункт 3: Отчеты -->
+                    <div class="update-item">
+                        <div class="update-item-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Отчеты по рассылке по группам
+                        </div>
+                        <ul class="update-item-list">
+                            <li>Добавлен блок "Не отмеченные пользователи" в отчете</li>
+                            <li>При остановке рассылки по кнопке "Остановить" отчет формируется сразу</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
