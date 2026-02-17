@@ -238,6 +238,129 @@
             opacity: 0.8;
         }
 
+        /* Анимированный эффект скрытого текста */
+        .spoiler-text {
+            display: inline-block;
+            position: relative;
+            background: #f3f4f6;
+            color: transparent;
+            user-select: none;
+            border-radius: 3px;
+            padding: 2px 4px;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            overflow: hidden;
+            min-width: 0.5em;
+        }
+
+        .spoiler-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle, rgba(0, 0, 0, 0.15) 0.5px, transparent 0.5px),
+                radial-gradient(circle, rgba(0, 0, 0, 0.12) 0.5px, transparent 0.5px),
+                radial-gradient(circle, rgba(0, 0, 0, 0.1) 0.5px, transparent 0.5px),
+                radial-gradient(circle, rgba(0, 0, 0, 0.08) 0.5px, transparent 0.5px);
+            background-size: 3px 3px, 4px 4px, 5px 5px, 6px 6px;
+            background-position: 
+                0 0,
+                1px 1px,
+                2px 2px,
+                3px 3px;
+            animation: spoiler-noise 0.12s steps(1) infinite;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .spoiler-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(0, 0, 0, 0.2) 0.8px, transparent 0.8px),
+                radial-gradient(circle at 45% 65%, rgba(0, 0, 0, 0.18) 0.8px, transparent 0.8px),
+                radial-gradient(circle at 75% 15%, rgba(0, 0, 0, 0.16) 0.8px, transparent 0.8px),
+                radial-gradient(circle at 25% 85%, rgba(0, 0, 0, 0.14) 0.8px, transparent 0.8px),
+                radial-gradient(circle at 55% 45%, rgba(0, 0, 0, 0.12) 0.8px, transparent 0.8px),
+                radial-gradient(circle at 85% 75%, rgba(0, 0, 0, 0.1) 0.8px, transparent 0.8px);
+            background-size: 8px 8px, 9px 9px, 10px 10px, 11px 11px, 12px 12px, 13px 13px;
+            background-position: 
+                0 0,
+                2px 2px,
+                4px 4px,
+                6px 6px,
+                8px 8px,
+                10px 10px;
+            animation: spoiler-dots 0.18s steps(6) infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spoiler-noise {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 0.85;
+            }
+            25% { 
+                transform: translate(-0.5px, 0.5px);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translate(0.5px, -0.5px);
+                opacity: 0.88;
+            }
+            75% { 
+                transform: translate(-0.5px, -0.5px);
+                opacity: 0.87;
+            }
+            100% { 
+                transform: translate(0.5px, 0.5px);
+                opacity: 0.85;
+            }
+        }
+
+        @keyframes spoiler-dots {
+            0% { 
+                background-position: 0 0, 2px 2px, 4px 4px, 6px 6px, 8px 8px, 10px 10px;
+                opacity: 0.7;
+            }
+            16.66% { 
+                background-position: 0.5px 0.5px, 2.5px 2.5px, 4.5px 4.5px, 6.5px 6.5px, 8.5px 8.5px, 10.5px 10.5px;
+                opacity: 0.75;
+            }
+            33.33% { 
+                background-position: 1px 1px, 3px 3px, 5px 5px, 7px 7px, 9px 9px, 11px 11px;
+                opacity: 0.8;
+            }
+            50% { 
+                background-position: 0.5px 0.5px, 2.5px 2.5px, 4.5px 4.5px, 6.5px 6.5px, 8.5px 8.5px, 10.5px 10.5px;
+                opacity: 0.75;
+            }
+            66.66% { 
+                background-position: 0 0, 2px 2px, 4px 4px, 6px 6px, 8px 8px, 10px 10px;
+                opacity: 0.7;
+            }
+            83.33% { 
+                background-position: -0.5px -0.5px, 1.5px 1.5px, 3.5px 3.5px, 5.5px 5.5px, 7.5px 7.5px, 9.5px 9.5px;
+                opacity: 0.72;
+            }
+            100% { 
+                background-position: 0 0, 2px 2px, 4px 4px, 6px 6px, 8px 8px, 10px 10px;
+                opacity: 0.7;
+            }
+        }
+
+        .spoiler-text:hover {
+            background: #e5e7eb;
+        }
+
         @media (max-width: 768px) {
             .updates-header h1 {
                 font-size: 1.7rem;
@@ -368,5 +491,75 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/main.js"></script>
+    <script>
+        // Функция для замены ||текст|| на анимированный спойлер
+        function processSpoilers() {
+            const spoilerRegex = /\|\|([^|]+)\|\|/g;
+            const containers = document.querySelectorAll('.update-content, .update-item-list');
+            
+            containers.forEach(container => {
+                // Обрабатываем только текстовые узлы
+                const walker = document.createTreeWalker(
+                    container,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+                
+                const textNodes = [];
+                let node;
+                while (node = walker.nextNode()) {
+                    if (spoilerRegex.test(node.textContent)) {
+                        textNodes.push(node);
+                    }
+                }
+                
+                textNodes.forEach(textNode => {
+                    const parent = textNode.parentNode;
+                    const text = textNode.textContent;
+                    const matches = [...text.matchAll(spoilerRegex)];
+                    
+                    if (matches.length === 0) return;
+                    
+                    const fragment = document.createDocumentFragment();
+                    let lastIndex = 0;
+                    
+                    matches.forEach(match => {
+                        // Добавляем текст до спойлера
+                        if (match.index > lastIndex) {
+                            fragment.appendChild(
+                                document.createTextNode(text.substring(lastIndex, match.index))
+                            );
+                        }
+                        
+                        // Создаем элемент спойлера
+                        const spoiler = document.createElement('span');
+                        spoiler.className = 'spoiler-text';
+                        spoiler.textContent = match[1];
+                        spoiler.setAttribute('data-spoiler', match[1]);
+                        fragment.appendChild(spoiler);
+                        
+                        lastIndex = match.index + match[0].length;
+                    });
+                    
+                    // Добавляем оставшийся текст
+                    if (lastIndex < text.length) {
+                        fragment.appendChild(
+                            document.createTextNode(text.substring(lastIndex))
+                        );
+                    }
+                    
+                    parent.replaceChild(fragment, textNode);
+                });
+            });
+        }
+        
+        // Запускаем обработку после загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', processSpoilers);
+        } else {
+            processSpoilers();
+        }
+    </script>
 </body>
 </html>
