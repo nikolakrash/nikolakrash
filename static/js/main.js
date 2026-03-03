@@ -109,6 +109,27 @@ function animateCounter(element) {
 // Запуск анимации счетчиков при загрузке
 document.addEventListener('DOMContentLoaded', function() {
     const statNumbers = document.querySelectorAll('.stat-number');
+    
+    // Функция для проверки видимости элемента
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Проверяем видимость при загрузке и запускаем анимацию для видимых элементов
+    statNumbers.forEach(stat => {
+        if (isElementInViewport(stat) && !stat.classList.contains('animated')) {
+            stat.classList.add('animated');
+            animateCounter(stat);
+        }
+    });
+    
+    // Наблюдаем за элементами, которые еще не видны
     const statsObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
@@ -116,14 +137,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 animateCounter(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
     
     statNumbers.forEach(stat => {
-        statsObserver.observe(stat);
+        if (!stat.classList.contains('animated')) {
+            statsObserver.observe(stat);
+        }
     });
 });
 
-
 // Медиа-слайдер вынесен в отдельный файл media-slider.js
-
-});
