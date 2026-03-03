@@ -88,8 +88,8 @@ body {
     justify-content: space-between;
 }
 
-/* Spline 3D фон */
-.hero-spline-background {
+/* Видео фон */
+.hero-video-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -97,36 +97,18 @@ body {
     height: 100%;
     z-index: 0;
     overflow: hidden;
-    background: #000;
 }
 
-.spline-container {
+.hero-video {
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.spline-container canvas {
-    width: 100% !important;
-    height: 100% !important;
     object-fit: cover;
-}
-
-/* Fallback для случая, если Spline не загрузился */
-.spline-fallback {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
 }
 
 /* Spotlight эффект */
@@ -494,11 +476,6 @@ body {
     
     .hero-subtitle {
         font-size: 1.4rem;
-    }
-    
-    /* Оптимизация Spline для мобильных */
-    .spline-container {
-        min-height: 100vh;
     }
     
     .spotlight-effect {
