@@ -73,11 +73,16 @@
             <i class="fas fa-check"></i>
         </div>
         <h1>Оплата успешно завершена</h1>
-        <p>Платежная форма T-Bank вернула вас на страницу подтверждения TeleBoosting. Если это тест, значит сценарий перехода после успешной оплаты работает корректно.</p>
+        <p>Платежная форма T-Bank вернула вас на страницу подтверждения TeleBoosting. Через несколько секунд откроется новая тестовая форма, чтобы вы могли сразу повторить проверку другой картой.</p>
         <div class="success-actions">
-            <a class="btn btn-primary" href="index.html">На главную</a>
-            <a class="btn btn-outline-light" href="payment.html">Вернуться к оплате</a>
+            <a class="btn btn-primary" href="payment.html">Создать новый тестовый платёж</a>
+            <a class="btn btn-outline-light" href="index.html">На главную</a>
         </div>
     </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = 'payment.html';
+        }, 5000);
+    </script>
 </body>
 </html>
