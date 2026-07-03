@@ -3,342 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оплата TeleBoosting</title>
-    <meta name="description" content="Тестовая страница оплаты TeleBoosting через платежную форму T-Bank.">
+    <title>Переход к оплате | TeleBoosting</title>
     <link rel="icon" type="image/x-icon" href="static/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
     <style>
         body {
             min-height: 100vh;
-            background:
-                radial-gradient(circle at top left, rgba(102, 126, 234, 0.35), transparent 35%),
-                radial-gradient(circle at bottom right, rgba(118, 75, 162, 0.35), transparent 30%),
-                linear-gradient(135deg, #0b1020 0%, #121a33 50%, #0f172a 100%);
-            color: #fff;
-        }
-
-        .payment-shell {
-            padding: 140px 20px 80px;
-        }
-
-        .payment-card {
-            max-width: 1180px;
-            margin: 0 auto;
-            background: rgba(10, 14, 30, 0.82);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-            overflow: hidden;
-            backdrop-filter: blur(14px);
-        }
-
-        .payment-grid {
-            display: grid;
-            grid-template-columns: 420px 1fr;
-        }
-
-        .payment-info {
-            padding: 42px 32px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .payment-info h1 {
-            font-size: 2.4rem;
-            margin-bottom: 18px;
-        }
-
-        .payment-info p {
-            color: rgba(255, 255, 255, 0.82);
-            margin-bottom: 18px;
-        }
-
-        .payment-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-        }
-
-        .payment-points {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 28px;
-        }
-
-        .payment-points li {
             display: flex;
-            gap: 12px;
-            margin-bottom: 14px;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .payment-points i {
-            color: #7dd3fc;
-            margin-top: 4px;
-        }
-
-        .payment-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .payment-actions .btn {
-            border-radius: 14px;
-            padding: 14px 18px;
-            font-weight: 600;
-        }
-
-        .payment-frame-wrap {
-            padding: 18px;
-            min-height: 760px;
-            position: relative;
-        }
-
-        .payment-frame {
-            width: 100%;
-            min-height: 724px;
-            border: 0;
-            border-radius: 22px;
-            background: #fff;
-            display: none;
-        }
-
-        .payment-loader {
-            min-height: 724px;
-            border-radius: 22px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px dashed rgba(255, 255, 255, 0.18);
-            text-align: center;
+            margin: 0;
             padding: 24px;
+            background: #0f172a;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .payment-loader.hidden {
+        .box {
+            width: 100%;
+            max-width: 520px;
+            padding: 36px 28px;
+            border-radius: 22px;
+            background: rgba(15, 23, 42, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+
+        .icon {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(59, 130, 246, 0.14);
+            color: #93c5fd;
+            font-size: 1.9rem;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            margin-bottom: 14px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 20px;
+        }
+
+        .status {
+            min-height: 24px;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .actions {
             display: none;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: fit-content;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(125, 211, 252, 0.14);
-            color: #bae6fd;
-            margin-bottom: 18px;
-            font-size: 0.95rem;
+        .actions.visible {
+            display: flex;
         }
 
-        .status-pill.error {
-            background: rgba(248, 113, 113, 0.14);
-            color: #fecaca;
-        }
-
-        .payment-note {
-            margin-top: 22px;
-            font-size: 0.92rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        @media (max-width: 991px) {
-            .payment-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .payment-info {
-                border-right: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            }
-
-            .payment-shell {
-                padding-top: 110px;
-            }
-
-            .payment-frame-wrap {
-                padding: 14px;
-                min-height: 700px;
-            }
-
-            .payment-frame,
-            .payment-loader {
-                min-height: 660px;
-            }
+        .btn {
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-rocket"></i> TeleBoosting
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#home">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#features">Возможности</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#advantages">Преимущества</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#pricing">Цены</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#download">Скачать</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="payment.html">Оплата</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="guide.html">Руководство</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="updates.html">Обновления</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="articles.html">Статьи</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="box">
+        <div class="icon">
+            <i id="status-icon" class="fas fa-circle-notch fa-spin"></i>
         </div>
-    </header>
+        <h1>Перенаправляем на оплату</h1>
+        <p>T-Bank форма сейчас откроется автоматически.</p>
+        <div id="status" class="status">Создаём платёж...</div>
+        <div id="actions" class="actions">
+            <button id="retry-btn" class="btn btn-primary" type="button">Повторить</button>
+            <a class="btn btn-outline-light" href="index.html">На главную</a>
+        </div>
+    </div>
 
-    <main class="payment-shell">
-        <section class="payment-card">
-            <div class="payment-grid">
-                <div class="payment-info">
-                    <div class="payment-badge">
-                        <i class="fas fa-flask"></i>
-                        <span>Тестовая форма T-Bank</span>
-                    </div>
-                    <h1>Оплата TeleBoosting</h1>
-                    <p>Эта страница каждый раз создаёт новый тестовый платёж через API T-Bank, поэтому форму можно проходить повторно разными тестовыми картами.</p>
-                    <div id="status-pill" class="status-pill">
-                        <i class="fas fa-circle-notch fa-spin"></i>
-                        <span id="status-text">Создаём новый тестовый платёж...</span>
-                    </div>
-                    <ul class="payment-points">
-                        <li><i class="fas fa-check-circle"></i><span>Новый OrderId генерируется автоматически при каждом открытии страницы.</span></li>
-                        <li><i class="fas fa-check-circle"></i><span>Сумма тестового платежа: <strong>100 ₽</strong>.</span></li>
-                        <li><i class="fas fa-check-circle"></i><span>После успешной оплаты можно сразу создать ещё один тестовый счёт.</span></li>
-                    </ul>
-                    <div class="payment-actions">
-                        <button id="new-payment-btn" class="btn btn-primary" type="button">
-                            <i class="fas fa-rotate-right"></i> Создать новый тестовый платёж
-                        </button>
-                        <a id="open-payment-btn" class="btn btn-outline-light disabled" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">
-                            <i class="fas fa-credit-card"></i> Открыть форму в новой вкладке
-                        </a>
-                        <a class="btn btn-outline-light" href="index.html#pricing">
-                            <i class="fas fa-arrow-left"></i> Вернуться к тарифам
-                        </a>
-                    </div>
-                    <div class="payment-note">
-                        Для теста используется demo-терминал T-Bank. Такой способ подходит для проверки сценария, но не для production-интеграции.
-                    </div>
-                </div>
-                <div class="payment-frame-wrap">
-                    <div id="payment-loader" class="payment-loader">
-                        <div class="spinner-border text-light" role="status"></div>
-                        <h3>Подготавливаем форму оплаты</h3>
-                        <p id="loader-text" class="mb-0 text-white-50">Создаём новый счёт через API T-Bank.</p>
-                    </div>
-                    <iframe
-                        id="payment-frame"
-                        class="payment-frame"
-                        src="about:blank"
-                        title="Платежная форма T-Bank"
-                        loading="lazy"
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const TERMINAL_KEY = '1783065318773DEMO';
         const PASSWORD = 'wBBs$dZWOqGwOqJQ';
+        const INIT_URL = 'https://securepay.tinkoff.ru/v2/Init';
         const AMOUNT = 10000;
         const DESCRIPTION = 'Тестовая оплата TeleBoosting 100 RUB';
-        const INIT_URL = 'https://securepay.tinkoff.ru/v2/Init';
+        const statusNode = document.getElementById('status');
+        const statusIcon = document.getElementById('status-icon');
+        const actions = document.getElementById('actions');
+        const retryBtn = document.getElementById('retry-btn');
 
-        const statusPill = document.getElementById('status-pill');
-        const statusText = document.getElementById('status-text');
-        const loader = document.getElementById('payment-loader');
-        const loaderText = document.getElementById('loader-text');
-        const frame = document.getElementById('payment-frame');
-        const newPaymentBtn = document.getElementById('new-payment-btn');
-        const openPaymentBtn = document.getElementById('open-payment-btn');
-
-        function setStatus(text, state = 'loading') {
-            statusPill.classList.toggle('error', state === 'error');
-            statusPill.innerHTML = state === 'error'
-                ? '<i class="fas fa-triangle-exclamation"></i><span id="status-text"></span>'
-                : state === 'success'
-                    ? '<i class="fas fa-circle-check"></i><span id="status-text"></span>'
-                    : '<i class="fas fa-circle-notch fa-spin"></i><span id="status-text"></span>';
-            document.getElementById('status-text').textContent = text;
+        function setLoading(text) {
+            statusNode.textContent = text;
+            statusIcon.className = 'fas fa-circle-notch fa-spin';
+            actions.classList.remove('visible');
         }
 
-        function showLoader(text) {
-            loader.classList.remove('hidden');
-            loaderText.textContent = text;
-            frame.style.display = 'none';
-        }
-
-        function showFrame(url) {
-            frame.src = url;
-            frame.style.display = 'block';
-            loader.classList.add('hidden');
-        }
-
-        function enableOpenButton(url) {
-            openPaymentBtn.href = url;
-            openPaymentBtn.classList.remove('disabled');
-            openPaymentBtn.removeAttribute('aria-disabled');
-        }
-
-        function disableOpenButton() {
-            openPaymentBtn.href = '#';
-            openPaymentBtn.classList.add('disabled');
-            openPaymentBtn.setAttribute('aria-disabled', 'true');
-        }
-
-        function randomSuffix() {
-            return Math.random().toString(36).slice(2, 10);
+        function setError(text) {
+            statusNode.textContent = text;
+            statusIcon.className = 'fas fa-triangle-exclamation';
+            actions.classList.add('visible');
         }
 
         function buildOrderId() {
-            return `tb-test-${Date.now()}-${randomSuffix()}`;
+            return `tb-test-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
         }
 
         function buildRedirectDueDate() {
             const date = new Date(Date.now() + 89 * 24 * 60 * 60 * 1000);
-            return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
+            const pad = (value) => String(value).padStart(2, '0');
+            const year = date.getFullYear();
+            const month = pad(date.getMonth() + 1);
+            const day = pad(date.getDate());
+            const hours = pad(date.getHours());
+            const minutes = pad(date.getMinutes());
+            const seconds = pad(date.getSeconds());
+            return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}+00:00`;
         }
 
         async function sha256Hex(input) {
@@ -350,27 +141,23 @@
         }
 
         async function buildToken(payload) {
-            const tokenFields = {};
+            const tokenFields = { Password: PASSWORD };
             Object.keys(payload)
                 .sort()
-                .forEach(key => {
+                .forEach((key) => {
                     tokenFields[key] = String(payload[key]);
                 });
-            tokenFields.Password = PASSWORD;
 
             const concat = Object.keys(tokenFields)
                 .sort()
-                .map(key => tokenFields[key])
+                .map((key) => tokenFields[key])
                 .join('');
 
             return sha256Hex(concat);
         }
 
-        async function createPayment() {
-            newPaymentBtn.disabled = true;
-            disableOpenButton();
-            setStatus('Создаём новый тестовый платёж...', 'loading');
-            showLoader('Создаём новый счёт через API T-Bank.');
+        async function redirectToPayment() {
+            setLoading('Создаём платёж...');
 
             const payload = {
                 TerminalKey: TERMINAL_KEY,
@@ -382,46 +169,29 @@
                 RedirectDueDate: buildRedirectDueDate()
             };
 
-            payload.Token = await buildToken(payload);
-
             try {
+                payload.Token = await buildToken(payload);
+
                 const response = await fetch(INIT_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
                 const data = await response.json();
 
                 if (!response.ok || !data.Success || !data.PaymentURL) {
-                    throw new Error(data.Message || data.Details || data.ErrorCode || 'Не удалось создать тестовый платёж.');
+                    throw new Error(data.Message || 'Не удалось создать платёж.');
                 }
 
-                setStatus(`Новый платёж создан: ${data.OrderId}`, 'success');
-                enableOpenButton(data.PaymentURL);
-                showFrame(data.PaymentURL);
+                window.location.replace(data.PaymentURL);
             } catch (error) {
-                setStatus(`Ошибка: ${error.message}`, 'error');
-                showLoader('Не удалось создать форму оплаты. Нажмите кнопку выше и попробуйте снова.');
-            } finally {
-                newPaymentBtn.disabled = false;
+                setError(error.message || 'Ошибка при создании платежа.');
             }
         }
 
-        newPaymentBtn.addEventListener('click', createPayment);
-
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        createPayment();
+        retryBtn.addEventListener('click', redirectToPayment);
+        redirectToPayment();
     </script>
 </body>
 </html>
