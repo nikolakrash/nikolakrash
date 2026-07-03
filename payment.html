@@ -94,11 +94,11 @@
     </div>
 
     <script>
-        const TERMINAL_KEY = '1783065318773DEMO';
-        const PASSWORD = 'wBBs$dZWOqGwOqJQ';
+        const TERMINAL_KEY = '1783065318794';
+        const PASSWORD = 'E7DKRNJ$D%tvWrYm';
         const INIT_URL = 'https://securepay.tinkoff.ru/v2/Init';
         const AMOUNT = 10000;
-        const DESCRIPTION = 'Тестовая оплата TeleBoosting 100 RUB';
+        const DESCRIPTION = 'Оплата TeleBoosting 100 RUB';
         const statusNode = document.getElementById('status');
         const statusIcon = document.getElementById('status-icon');
         const actions = document.getElementById('actions');
@@ -117,7 +117,7 @@
         }
 
         function buildOrderId() {
-            return `tb-test-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+            return `tb-pay-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
         }
 
         function buildRedirectDueDate() {
