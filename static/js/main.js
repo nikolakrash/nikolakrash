@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobileMenuBreakpoint = window.matchMedia('(max-width: 991px)');
+
+    function setMobileMenuState(isOpen) {
+        if (!navbarCollapse || !navbarToggler) return;
+        navbarCollapse.classList.toggle('show', isOpen);
+        navbarToggler.setAttribute('aria-expanded', String(isOpen));
+    }
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', function(e) {
@@ -17,19 +24,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: reducedMotion ? 'auto' : 'smooth'
             });
 
-            if (navbarCollapse) {
-                navbarCollapse.classList.remove('show');
-            }
-            if (navbarToggler) {
-                navbarToggler.setAttribute('aria-expanded', 'false');
-            }
+            setMobileMenuState(false);
         });
     });
 
     if (navbarToggler && navbarCollapse) {
-        navbarToggler.addEventListener('click', function() {
-            const isOpen = navbarCollapse.classList.toggle('show');
-            navbarToggler.setAttribute('aria-expanded', String(isOpen));
+        setMobileMenuState(false);
+
+        navbarToggler.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = !navbarCollapse.classList.contains('show');
+            setMobileMenuState(isOpen);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBreakpoint.matches) return;
+            if (navbarCollapse.contains(e.target) || navbarToggler.contains(e.target)) return;
+            setMobileMenuState(false);
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                setMobileMenuState(false);
+            }
+        });
+
+        mobileMenuBreakpoint.addEventListener('change', function(event) {
+            if (!event.matches) {
+                setMobileMenuState(false);
+            }
         });
     }
 
