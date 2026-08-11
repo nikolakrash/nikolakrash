@@ -1870,3 +1870,24 @@ html {
 .feature-card:nth-child(10) { animation-delay: 1s; }
 .feature-card:nth-child(11) { animation-delay: 1.1s; }
 .feature-card:nth-child(12) { animation-delay: 1.2s; }
+
+/* Видимые хлебные крошки (дублируют BreadcrumbList JSON-LD) */
+.breadcrumb-nav {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 14px;
+}
+.breadcrumb-nav a {
+    color: #94a3b8;
+    text-decoration: none;
+}
+.breadcrumb-nav a:hover {
+    color: #fff;
+}
+.breadcrumb-nav .sep {
+    margin: 0 6px;
+    color: #475569;
+}
+.breadcrumb-nav .current {
+    color: #e5e7eb;
+}
