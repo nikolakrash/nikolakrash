@@ -11,6 +11,14 @@ ROOT = Path(__file__).resolve().parent.parent
 SITEMAP_PATH = ROOT / "sitemap.xml"
 ROBOTS_PATH = ROOT / "robots.txt"
 
+# Транзакционные страницы (noindex) и служебные файлы верификации —
+# не должны попадать в sitemap, даже если лежат в корне как *.html.
+EXCLUDE_FROM_SITEMAP = {
+    "payment.html",
+    "payment-success.html",
+    "wsf2rcsoogn4walk.html",
+}
+
 
 def page_url(path: Path) -> str:
     if path.name == "index.html":
@@ -24,7 +32,9 @@ def lastmod(path: Path) -> str:
 
 
 def build_sitemap() -> None:
-    html_pages = sorted(ROOT.glob("*.html"))
+    html_pages = sorted(
+        p for p in ROOT.glob("*.html") if p.name not in EXCLUDE_FROM_SITEMAP
+    )
     urlset = Element(
         "urlset",
         {
