@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка ссылок Telegram: как отличить рабочую ссылку от мёртвой без аккаунта</title>
+    <link rel="canonical" href="https://teleboosting.com/proverka-ssylok-telegram">
+    <meta name="description" content="Проверка ссылок Telegram без авторизации: как определить тип объекта (канал, группа, бот, пользователь), доступность и валидность ссылки перед рассылкой или парсингом.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://teleboosting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Статьи", "item": "https://teleboosting.com/articles" },
+        { "@type": "ListItem", "position": 3, "name": "Проверка ссылок Telegram: как отличить рабочую ссылку от мёртвой без аккаунта", "item": "https://teleboosting.com/proverka-ssylok-telegram" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Проверка ссылок Telegram: как отличить рабочую ссылку от мёртвой без аккаунта",
+      "description": "Проверка ссылок Telegram без авторизации: как определить тип объекта (канал, группа, бот, пользователь), доступность и валидность ссылки перед рассылкой или парсингом.",
+      "image": "https://teleboosting.com/static/images/proverka-ssylok-hero.jpg",
+      "author": { "@type": "Organization", "name": "Teleboosting" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Teleboosting",
+        "logo": { "@type": "ImageObject", "url": "https://teleboosting.com/static/favicon-512x512.png" }
+      },
+      "datePublished": "2026-08-12",
+      "dateModified": "2026-08-12",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://teleboosting.com/proverka-ssylok-telegram" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужен ли аккаунт Telegram для проверки ссылок?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Нет, проверка идёт обычными HTTP-запросами к странице t.me без авторизации и без привязки к аккаунту Telegram." }
+        },
+        {
+          "@type": "Question",
+          "name": "Какие форматы ссылок можно проверять?",
+          "acceptedAnswer": { "@type": "Answer", "text": "t.me/username, telegram.me/username, приватные ссылки t.me/+hash и t.me/joinchat/..., а также ссылки на посты t.me/c/ID/номер, с протоколом или без." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как определяется, канал это или группа?",
+          "acceptedAnswer": { "@type": "Answer", "text": "По маркерам на странице: наличие слова «subscribers» указывает на канал, «members» на группу, «bot» в username или в маркерах разметки на бота. Всё остальное считается обычным пользователем." }
+        },
+        {
+          "@type": "Question",
+          "name": "Может ли проверка ошибиться на приватных ссылках?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, это заявленное ограничение: приватные ссылки иногда показывают статус «Валидная» без детальной информации, потому что публичная страница t.me не раскрывает подробности закрытых объектов." }
+        }
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/favicon-512x512.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <style>
+        body { background: #0b1224; color: #e5e7eb; min-height: 100vh; }
+        .article-hero { padding: 120px 20px 30px; background: linear-gradient(135deg, #0f172a 0%, #111827 40%, #0b1224 100%); }
+        .article-hero .hero-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+        .article-hero h1 { color: #fff; font-size: 2.1rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+        .article-hero p { color: #cbd5e1; max-width: 780px; margin: 0 auto; }
+        .article-container { max-width: 980px; margin: 0 auto; padding: 24px; }
+        .article-cover { position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.45); margin-bottom: 24px; background: #0f172a; }
+        .article-cover img { width: 100%; display: block; object-fit: contain; height: auto; }
+        .article-body h2 { font-size: 1.35rem; margin: 20px 0 10px; color: #fff; }
+        .article-body h3 { font-size: 1.1rem; margin: 16px 0 8px; color: #fff; }
+        .article-body p { color: #d1d5db; line-height: 1.65; margin-bottom: 14px; }
+        .article-body ul, .article-body ol { color: #d1d5db; padding-left: 18px; margin-bottom: 14px; }
+        .article-body li { margin-bottom: 6px; line-height: 1.5; }
+        .article-faq { margin-top: 28px; }
+        .faq-item { margin-bottom: 16px; }
+        .faq-item h3 { margin-bottom: 6px; }
+        .article-cta { margin: 24px 0; padding: 16px 18px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+        .article-actions { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #e5e7eb; padding: 10px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s ease; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+        .stealth-link { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.35); transition: border-color 0.2s ease; }
+        .stealth-link:hover { border-bottom-color: rgba(255,255,255,0.7); }
+        @media (max-width: 768px) {
+            .article-hero { padding: 100px 16px 24px; }
+            .article-hero h1 { font-size: 1.7rem; }
+            .article-container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-rocket"></i> TeleBoosting</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#features">Возможности</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#advantages">Преимущества</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#pricing">Цены</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#download">Скачать</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/guide">Руководство</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/updates">Обновления</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/articles">Статьи</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="article-hero">
+        <div class="hero-inner">
+            <nav class="breadcrumb-nav" aria-label="Хлебные крошки">
+                <a href="/">Главная</a><span class="sep">/</span><a href="/articles">Статьи</a><span class="sep">/</span><span class="current">Проверка ссылок Telegram: как отличить рабочую ссылку от мёртвой без аккаунта</span>
+            </nav>
+            <h1>Проверка ссылок Telegram: как отличить рабочую ссылку от мёртвой без аккаунта</h1>
+            <p>База на тысячи ссылок неизбежно содержит мусор. Модуль проверки находит его без единого аккаунта Telegram.</p>
+        </div>
+    </section>
+
+    <main class="article-container">
+        <div class="article-cover">
+            <img src="static/images/proverka-ssylok-hero.jpg" alt="Проверка ссылок Telegram без авторизации: тип объекта, доступность, CSV-отчёт">
+        </div>
+
+        <div class="article-body">
+            <p>Перед рассылкой или запуском парсера по большому списку ссылок обычно выясняется, что часть из них ведёт в никуда: аккаунт удалён, ссылка устарела или формат вообще неверный. Проверять такое вручную нереально, если ссылок сотни. Модуль решает это без единого действия внутри самого Telegram.</p>
+
+            <h2>Как проверка работает без аккаунта</h2>
+            <p>Модуль отправляет обычный HTTP-запрос к публичной странице <code>https://t.me/...</code> и анализирует полученный HTML: код ответа (200, 404, 500), наличие маркеров валидной страницы и признаков конкретного типа объекта. Авторизация в Telegram и привязка к аккаунту для этого не нужны.</p>
+
+            <h2>Какие форматы ссылок принимает модуль</h2>
+            <ul>
+                <li><code>t.me/username</code>, <code>https://t.me/username</code>, <code>telegram.me/username</code>;</li>
+                <li>приватные: <code>t.me/+hash</code>, <code>t.me/joinchat/AAAA...</code>;</li>
+                <li>ссылки на посты: <code>t.me/c/1234567890/123</code>.</li>
+            </ul>
+            <p>Ссылки можно вставлять с протоколом или без, модуль сам нормализует формат и убирает дубликаты перед проверкой.</p>
+
+            <h2>Как определяется тип и доступность</h2>
+            <p>По маркерам на странице модуль относит объект к одной из категорий: <strong>User</strong> (обычный аккаунт), <strong>Bot</strong> (по «bot» в username или маркерам бота), <strong>Channel</strong> (по слову «subscribers»), <strong>Group</strong> (по слову «members»). Отдельно определяется доступность: публичная ссылка открывается без приглашения, приватная требует инвайт или авторизацию.</p>
+
+            <h2>Что попадает в отчёт</h2>
+            <p>После проверки видна статистика: всего проверено, валидных, невалидных, найденных дублей. Детальный CSV-отчёт по каждой ссылке содержит саму ссылку, статус, тип объекта и доступность, готов к открытию в Excel или Google Таблицах. Функция входит в состав софта <a class="stealth-link" href="https://teleboosting.com" target="_blank" rel="noopener noreferrer">Teleboosting.com</a>.</p>
+
+            <h2>Ограничения, о которых стоит знать</h2>
+            <p>Проверяются только публичные данные: приватные ссылки иногда показывают статус «Валидная» без деталей, поскольку страница t.me не раскрывает содержимое закрытых объектов. Модуль также не проверяет реальную активность аккаунта или канала, только факт существования и доступности ссылки, а таймаут запроса ограничен 12 секундами.</p>
+
+            <p>Проверка особенно полезна перед запуском <a class="stealth-link" href="/parser-telegram">парсера</a> по большому списку каналов: чистая база без мёртвых ссылок экономит время и не тратит лимиты аккаунтов впустую.</p>
+
+            <div class="article-cta">
+                <p>Проверка без аккаунта, автоматическое определение типа и CSV-отчёт уже настроены в <a class="stealth-link" href="index.html#download">Teleboosting</a>, не нужно открывать каждую ссылку вручную.</p>
+            </div>
+
+            <section class="article-faq">
+                <h2>Частые вопросы</h2>
+                <div class="faq-item">
+                    <h3>Нужен ли аккаунт Telegram для проверки ссылок?</h3>
+                    <p>Нет, проверка идёт обычными HTTP-запросами к странице t.me без авторизации и без привязки к аккаунту Telegram.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Какие форматы ссылок можно проверять?</h3>
+                    <p>t.me/username, telegram.me/username, приватные ссылки t.me/+hash и t.me/joinchat/..., а также ссылки на посты t.me/c/ID/номер, с протоколом или без.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Как определяется, канал это или группа?</h3>
+                    <p>По маркерам на странице: «subscribers» указывает на канал, «members» на группу, «bot» в username на бота. Всё остальное считается обычным пользователем.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Может ли проверка ошибиться на приватных ссылках?</h3>
+                    <p>Да, приватные ссылки иногда показывают статус «Валидная» без детальной информации, потому что публичная страница t.me не раскрывает подробности закрытых объектов.</p>
+                </div>
+            </section>
+
+            <h2>Итог</h2>
+            <p>Проверка ссылок закрывает рутинную, но необходимую задачу: отсеять мёртвые и невалидные адреса до того, как на них потрачены лимиты аккаунтов в других модулях. Работа без авторизации и автоматическое определение типа объекта делают её быстрым первым шагом перед любой массовой операцией.</p>
+        </div>
+
+        <div class="article-actions">
+            <a class="btn-ghost" href="/articles"><i class="fas fa-arrow-left"></i> К списку статей</a>
+            <a class="btn-ghost" href="/guide#section-audience-link-checker"><i class="fas fa-book"></i> Руководство по проверке ссылок</a>
+            <a class="btn-ghost" href="index.html#download"><i class="fas fa-download"></i> Скачать TeleBoosting</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
