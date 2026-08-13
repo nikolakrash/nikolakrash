@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отложенный постинг в Telegram: почему пост иногда выходит не в то время</title>
+    <link rel="canonical" href="https://teleboosting.com/otlozhenny-posting-telegram">
+    <meta name="description" content="Отложенный постинг в Telegram публикует посты по расписанию в фоне. Разбираем, откуда берётся время публикации и почему пост может выйти раньше или позже.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://teleboosting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Статьи", "item": "https://teleboosting.com/articles" },
+        { "@type": "ListItem", "position": 3, "name": "Отложенный постинг в Telegram: почему пост иногда выходит не в то время", "item": "https://teleboosting.com/otlozhenny-posting-telegram" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Отложенный постинг в Telegram: почему пост иногда выходит не в то время",
+      "description": "Отложенный постинг в Telegram публикует посты по расписанию в фоне. Разбираем, откуда берётся время публикации и почему пост может выйти раньше или позже.",
+      "image": "https://teleboosting.com/static/images/otlozhenny-posting-hero.jpg",
+      "author": { "@type": "Organization", "name": "Teleboosting" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Teleboosting",
+        "logo": { "@type": "ImageObject", "url": "https://teleboosting.com/static/favicon-512x512.png" }
+      },
+      "datePublished": "2026-08-13",
+      "dateModified": "2026-08-13",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://teleboosting.com/otlozhenny-posting-telegram" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Откуда модуль берёт время публикации поста?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Из локального времени вашего компьютера. Браузер считает выбранное время местным, модуль переводит его в UTC и сохраняет на сервере, который публикует пост по достижении этого момента." }
+        },
+        {
+          "@type": "Question",
+          "name": "Влияет ли геолокация или IP на время публикации?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Нет, модуль ничего не вычисляет по IP или геолокации. Всё основано только на системном времени и таймзоне компьютера, где вы задаёте расписание." }
+        },
+        {
+          "@type": "Question",
+          "name": "Продолжит ли постинг работать, если закрыть вкладку?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, планировщик работает в фоне на сервере, пока запущен основной софт. Закрытие вкладки браузера не останавливает запланированные публикации." }
+        },
+        {
+          "@type": "Question",
+          "name": "Что значат статусы scheduled, queued, processing, completed, error?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Scheduled: пост запланирован, queued: поставлен в очередь на отправку, processing: отправляется, completed: успешно опубликован, error: публикация не удалась, текст ошибки виден в статусе поста." }
+        }
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/favicon-512x512.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <style>
+        body { background: #0b1224; color: #e5e7eb; min-height: 100vh; }
+        .article-hero { padding: 120px 20px 30px; background: linear-gradient(135deg, #0f172a 0%, #111827 40%, #0b1224 100%); }
+        .article-hero .hero-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+        .article-hero h1 { color: #fff; font-size: 2.1rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+        .article-hero p { color: #cbd5e1; max-width: 780px; margin: 0 auto; }
+        .article-container { max-width: 980px; margin: 0 auto; padding: 24px; }
+        .article-cover { position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.45); margin-bottom: 24px; background: #0f172a; }
+        .article-cover img { width: 100%; display: block; object-fit: contain; height: auto; }
+        .article-body h2 { font-size: 1.35rem; margin: 20px 0 10px; color: #fff; }
+        .article-body h3 { font-size: 1.1rem; margin: 16px 0 8px; color: #fff; }
+        .article-body p { color: #d1d5db; line-height: 1.65; margin-bottom: 14px; }
+        .article-body ul, .article-body ol { color: #d1d5db; padding-left: 18px; margin-bottom: 14px; }
+        .article-body li { margin-bottom: 6px; line-height: 1.5; }
+        .article-faq { margin-top: 28px; }
+        .faq-item { margin-bottom: 16px; }
+        .faq-item h3 { margin-bottom: 6px; }
+        .article-cta { margin: 24px 0; padding: 16px 18px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+        .article-actions { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #e5e7eb; padding: 10px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s ease; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+        .stealth-link { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.35); transition: border-color 0.2s ease; }
+        .stealth-link:hover { border-bottom-color: rgba(255,255,255,0.7); }
+        @media (max-width: 768px) {
+            .article-hero { padding: 100px 16px 24px; }
+            .article-hero h1 { font-size: 1.7rem; }
+            .article-container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-rocket"></i> TeleBoosting</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#features">Возможности</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#advantages">Преимущества</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#pricing">Цены</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#download">Скачать</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/guide">Руководство</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/updates">Обновления</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/articles">Статьи</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="article-hero">
+        <div class="hero-inner">
+            <nav class="breadcrumb-nav" aria-label="Хлебные крошки">
+                <a href="/">Главная</a><span class="sep">/</span><a href="/articles">Статьи</a><span class="sep">/</span><span class="current">Отложенный постинг в Telegram: почему пост иногда выходит не в то время</span>
+            </nav>
+            <h1>Отложенный постинг в Telegram: почему пост иногда выходит не в то время</h1>
+            <p>Расписание постов настраивается один раз, но время публикации зависит от системных часов компьютера, а не от сервера или геолокации.</p>
+        </div>
+    </section>
+
+    <main class="article-container">
+        <div class="article-cover">
+            <img src="static/images/otlozhenny-posting-hero.jpg" alt="Отложенный постинг в Telegram: расписание публикаций по сессиям">
+        </div>
+
+        <div class="article-body">
+            <p>Отложенный постинг избавляет от необходимости сидеть у экрана в момент публикации: посты готовятся заранее, а софт публикует их по расписанию сам. Но именно с расписанием чаще всего возникает путаница, если не понимать, как модуль на самом деле считает время.</p>
+
+            <h2>Как устроен модуль: сессии и посты</h2>
+            <p>Сессия: это связка аккаунта и списка каналов или групп, куда он публикует. Внутри одной сессии можно создать несколько постов, каждому задать своё время публикации, текст и медиафайл. Планировщик в фоне постоянно проверяет список постов и запускает публикацию, когда наступает нужный момент.</p>
+
+            <h2>Откуда на самом деле берётся время публикации</h2>
+            <p>Здесь и кроется частая причина путаницы. Дата и время, которые вы выбираете в интерфейсе, браузер считает локальным временем вашего компьютера. Модуль переводит это значение в UTC и сохраняет в таком виде на сервере, который сравнивает текущее время в UTC с сохранённым и публикует пост в нужный момент.</p>
+            <p>Например, если на компьютере стоит московская таймзона (UTC+3) и в модуле выбрано 15:00, модуль сохранит 12:00 UTC и опубликует пост ровно тогда, когда это соответствует 15:00 по Москве. Если же таймзона на компьютере указана неверно, скажем UTC+1 вместо UTC+3, пост выйдет не в то время, которое вы имели в виду. Геолокация и IP на расчёт никак не влияют.</p>
+
+            <h2>Что можно настроить у поста</h2>
+            <ul>
+                <li>текстовые посты и посты с фото, видео или документом;</li>
+                <li>опциональная уникализация текста через ChatGPT;</li>
+                <li>опциональная стилизация оформления (выделения, форматирование);</li>
+                <li>публикация сразу в несколько каналов или групп из одной сессии.</li>
+            </ul>
+            <p>Функция входит в состав софта <a class="stealth-link" href="https://teleboosting.com" target="_blank" rel="noopener noreferrer">Teleboosting.com</a> и особенно удобна в связке с <a class="stealth-link" href="/article-kloner-top">клонером каналов</a>, когда контент сначала собирается автоматически, а публикуется уже по расписанию.</p>
+
+            <h2>Частые причины ошибок</h2>
+            <ul>
+                <li>аккаунт больше не имеет прав писать в канал или группу;</li>
+                <li>канал или группа удалены либо изменили тип доступа;</li>
+                <li>неверно скопирована ссылка или username канала;</li>
+                <li>неправильные дата, время или таймзона на компьютере;</li>
+                <li>ограничения Telegram, FloodWait или лимиты отправки.</li>
+            </ul>
+
+            <div class="article-cta">
+                <p>Сессии, расписание с учётом UTC и статусы каждого поста в реальном времени уже настроены в <a class="stealth-link" href="index.html#download">Teleboosting</a>.</p>
+            </div>
+
+            <section class="article-faq">
+                <h2>Частые вопросы</h2>
+                <div class="faq-item">
+                    <h3>Откуда модуль берёт время публикации поста?</h3>
+                    <p>Из локального времени вашего компьютера. Браузер считает выбранное время местным, модуль переводит его в UTC и публикует по достижении этого момента.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Влияет ли геолокация или IP на время публикации?</h3>
+                    <p>Нет, всё основано только на системном времени и таймзоне компьютера, где вы задаёте расписание.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Продолжит ли постинг работать, если закрыть вкладку?</h3>
+                    <p>Да, планировщик работает в фоне на сервере, пока запущен основной софт.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Что значат статусы scheduled, queued, processing, completed, error?</h3>
+                    <p>Scheduled: запланирован, queued: в очереди на отправку, processing: отправляется, completed: опубликован, error: публикация не удалась.</p>
+                </div>
+            </section>
+
+            <h2>Итог</h2>
+            <p>Отложенный постинг снимает необходимость публиковать посты вручную в нужный момент, но точность расписания напрямую зависит от правильных даты, времени и таймзоны на компьютере, где вы его настраиваете. Проверить это стоит один раз, прежде чем планировать десятки постов вперёд.</p>
+        </div>
+
+        <div class="article-actions">
+            <a class="btn-ghost" href="/articles"><i class="fas fa-arrow-left"></i> К списку статей</a>
+            <a class="btn-ghost" href="/guide#section-scheduler"><i class="fas fa-book"></i> Руководство по отложенному постингу</a>
+            <a class="btn-ghost" href="index.html#download"><i class="fas fa-download"></i> Скачать TeleBoosting</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
