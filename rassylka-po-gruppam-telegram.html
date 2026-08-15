@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рассылка по группам Telegram: 4 режима распределения и какой выбрать</title>
+    <link rel="canonical" href="https://teleboosting.com/rassylka-po-gruppam-telegram">
+    <meta name="description" content="Рассылка по группам Telegram: как работают глобальная и персональная задержки, ротация сообщений и 4 режима распределения аккаунтов по группам.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://teleboosting.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Статьи", "item": "https://teleboosting.com/articles" },
+        { "@type": "ListItem", "position": 3, "name": "Рассылка по группам Telegram: 4 режима распределения и какой выбрать", "item": "https://teleboosting.com/rassylka-po-gruppam-telegram" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Рассылка по группам Telegram: 4 режима распределения и какой выбрать",
+      "description": "Рассылка по группам Telegram: как работают глобальная и персональная задержки, ротация сообщений и 4 режима распределения аккаунтов по группам.",
+      "image": "https://teleboosting.com/static/images/rassylka-po-gruppam-hero.jpg",
+      "author": { "@type": "Organization", "name": "Teleboosting" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Teleboosting",
+        "logo": { "@type": "ImageObject", "url": "https://teleboosting.com/static/favicon-512x512.png" }
+      },
+      "datePublished": "2026-08-15",
+      "dateModified": "2026-08-15",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://teleboosting.com/rassylka-po-gruppam-telegram" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Какой режим распределения аккаунтов рекомендуется по умолчанию?",
+          "acceptedAnswer": { "@type": "Answer", "text": "«Аккаунты по кругу по всем группам» с циклическим сдвигом: каждый аккаунт равномерно побывает во всех группах, что снижает риск засветить один и тот же аккаунт в одних и тех же группах постоянно." }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему задержки между сообщениями случайные, а не фиксированные?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Одинаковые задержки Telegram может распознать как признак автоматической рассылки. Случайный диапазон делает поведение аккаунтов более естественным." }
+        },
+        {
+          "@type": "Question",
+          "name": "Что произойдёт, если оставить задержку на аккаунт пустой?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Модуль подставит безопасное значение по умолчанию: глобальная задержка, умноженная на 3. Например, при глобальной 5-10 секунд задержка на аккаунт составит 15-30 секунд." }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли использовать разные сообщения в одной рассылке?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, можно добавить несколько сообщений, они распределяются по аккаунтам по кругу: первый аккаунт отправляет первое сообщение, второй: второе, и так далее с повтором, если сообщений меньше, чем аккаунтов." }
+        }
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="static/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="static/favicon-512x512.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <style>
+        body { background: #0b1224; color: #e5e7eb; min-height: 100vh; }
+        .article-hero { padding: 120px 20px 30px; background: linear-gradient(135deg, #0f172a 0%, #111827 40%, #0b1224 100%); }
+        .article-hero .hero-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+        .article-hero h1 { color: #fff; font-size: 2.1rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+        .article-hero p { color: #cbd5e1; max-width: 780px; margin: 0 auto; }
+        .article-container { max-width: 980px; margin: 0 auto; padding: 24px; }
+        .article-cover { position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.45); margin-bottom: 24px; background: #0f172a; }
+        .article-cover img { width: 100%; display: block; object-fit: contain; height: auto; }
+        .article-body h2 { font-size: 1.35rem; margin: 20px 0 10px; color: #fff; }
+        .article-body h3 { font-size: 1.1rem; margin: 16px 0 8px; color: #fff; }
+        .article-body p { color: #d1d5db; line-height: 1.65; margin-bottom: 14px; }
+        .article-body ul, .article-body ol { color: #d1d5db; padding-left: 18px; margin-bottom: 14px; }
+        .article-body li { margin-bottom: 6px; line-height: 1.5; }
+        .article-faq { margin-top: 28px; }
+        .faq-item { margin-bottom: 16px; }
+        .faq-item h3 { margin-bottom: 6px; }
+        .article-cta { margin: 24px 0; padding: 16px 18px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+        .article-actions { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #e5e7eb; padding: 10px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s ease; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+        .stealth-link { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.35); transition: border-color 0.2s ease; }
+        .stealth-link:hover { border-bottom-color: rgba(255,255,255,0.7); }
+        @media (max-width: 768px) {
+            .article-hero { padding: 100px 16px 24px; }
+            .article-hero h1 { font-size: 1.7rem; }
+            .article-container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-rocket"></i> TeleBoosting</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#features">Возможности</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#advantages">Преимущества</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#pricing">Цены</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#download">Скачать</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/guide">Руководство</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/updates">Обновления</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/articles">Статьи</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="article-hero">
+        <div class="hero-inner">
+            <nav class="breadcrumb-nav" aria-label="Хлебные крошки">
+                <a href="/">Главная</a><span class="sep">/</span><a href="/articles">Статьи</a><span class="sep">/</span><span class="current">Рассылка по группам Telegram: 4 режима распределения и какой выбрать</span>
+            </nav>
+            <h1>Рассылка по группам Telegram: 4 режима распределения и какой выбрать</h1>
+            <p>Одно и то же сообщение можно разослать по-разному: от равномерной ротации аккаунтов до жёсткой привязки каждого к своей группе.</p>
+        </div>
+    </section>
+
+    <main class="article-container">
+        <div class="article-cover">
+            <img src="static/images/rassylka-po-gruppam-hero.jpg" alt="Рассылка по группам Telegram: режимы распределения аккаунтов">
+        </div>
+
+        <div class="article-body">
+            <p>Рассылка по группам отправляет сообщения от ваших аккаунтов сразу в список Telegram-групп и каналов. Отдельно можно указать несколько вариантов текста для ротации, а самое важное для сохранности аккаунтов, задержки и распределение нагрузки, настраивается гибко.</p>
+
+            <h2>Как устроены задержки</h2>
+            <p>Глобальная задержка задаёт общий темп: случайная пауза между каждым действием в заданном диапазоне, например 5-10 секунд. Отдельно можно указать задержку на аккаунт, паузу между отправками одного и того же аккаунта. Если её не задать, модуль применит автоматическое значение: глобальная задержка, умноженная на 3. Обе задержки учитываются одновременно: аккаунт не отправит сообщение, пока не пройдут оба условия.</p>
+
+            <h2>Ротация сообщений между аккаунтами</h2>
+            <p>Можно добавить несколько вариантов текста: первый аккаунт отправляет первое сообщение, второй, второе, и так далее по кругу. Например, при 3 аккаунтах и 2 сообщениях третий аккаунт снова получит первый вариант текста. Функция входит в состав софта <a class="stealth-link" href="https://teleboosting.com" target="_blank" rel="noopener noreferrer">Teleboosting.com</a>.</p>
+
+            <h2>4 режима распределения аккаунтов по группам</h2>
+            <ol>
+                <li><strong>Аккаунты по кругу по всем группам</strong> (рекомендуется): аккаунты работают по очереди, а циклический сдвиг гарантирует, что каждый аккаунт равномерно побывает во всех группах, а не будет привязан к одним и тем же;</li>
+                <li><strong>Один аккаунт → все группы</strong>: сначала весь список групп получает сообщения от первого аккаунта, затем от второго; нагрузка на один аккаунт заметно выше;</li>
+                <li><strong>Все аккаунты → одна группа</strong>: все аккаунты сразу пишут в одну и ту же группу, затем переходят к следующей; группа получает много сообщений почти одновременно;</li>
+                <li><strong>1 аккаунт = 1 группа (фикс)</strong>: жёсткая привязка каждого аккаунта к своей группе, предсказуемо, но без ротации.</li>
+            </ol>
+            <p>Для большинства задач подходит первый режим: он равномернее распределяет нагрузку и снижает риск, что один и тот же аккаунт будет постоянно засвечен в одних и тех же группах.</p>
+
+            <h2>Ориентиры по задержкам под объём</h2>
+            <ul>
+                <li>для начала: глобальная задержка 5-10 секунд, задержка на аккаунт не заполнять (автоматически);</li>
+                <li>для опытных: глобальная 3-8 секунд, задержка на аккаунт 20-60 секунд вручную;</li>
+                <li>для больших объёмов, от 100 групп: глобальная 7-15 секунд, задержка на аккаунт 40-90 секунд, и больше аккаунтов для распределения нагрузки.</li>
+            </ul>
+
+            <p>Перед запуском рассылки полезно прогнать список групп через <a class="stealth-link" href="/proverka-ssylok-telegram">проверку ссылок</a>: невалидные адреса лучше отсеять заранее, а не тратить на них лимиты аккаунтов во время самой рассылки.</p>
+
+            <div class="article-cta">
+                <p>Гибридная модель задержек и все 4 режима распределения уже настроены в <a class="stealth-link" href="index.html#download">Teleboosting</a>.</p>
+            </div>
+
+            <section class="article-faq">
+                <h2>Частые вопросы</h2>
+                <div class="faq-item">
+                    <h3>Какой режим распределения аккаунтов рекомендуется по умолчанию?</h3>
+                    <p>«Аккаунты по кругу по всем группам» с циклическим сдвигом: каждый аккаунт равномерно побывает во всех группах.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Почему задержки между сообщениями случайные, а не фиксированные?</h3>
+                    <p>Одинаковые задержки Telegram может распознать как признак автоматической рассылки, случайный диапазон делает поведение естественнее.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Что произойдёт, если оставить задержку на аккаунт пустой?</h3>
+                    <p>Модуль подставит безопасное значение по умолчанию: глобальная задержка, умноженная на 3.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Можно ли использовать разные сообщения в одной рассылке?</h3>
+                    <p>Да, несколько вариантов распределяются по аккаунтам по кругу.</p>
+                </div>
+            </section>
+
+            <h2>Итог</h2>
+            <p>Рассылка по группам работает предсказуемо только тогда, когда задержки и режим распределения подобраны под реальный объём: для десятка групп подходят стандартные настройки, а для сотни лучше сразу закладывать больше аккаунтов и более длинные паузы.</p>
+        </div>
+
+        <div class="article-actions">
+            <a class="btn-ghost" href="/articles"><i class="fas fa-arrow-left"></i> К списку статей</a>
+            <a class="btn-ghost" href="/guide#section-broadcast-groups"><i class="fas fa-book"></i> Руководство по рассылке по группам</a>
+            <a class="btn-ghost" href="index.html#download"><i class="fas fa-download"></i> Скачать TeleBoosting</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
