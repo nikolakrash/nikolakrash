@@ -43,6 +43,11 @@ export async function onRequest(context) {
     });
   }
 
+  if (url.pathname.startsWith('/downloads/')) {
+    const target = new URL(url.pathname + url.search, 'https://teleboosting.com');
+    return Response.redirect(target.toString(), 302);
+  }
+
   if (url.pathname === '/sitemap.xml' || url.pathname === '/sitemap') {
     return new Response('Not Found', {
       status: 404,
